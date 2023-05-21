@@ -123,7 +123,6 @@ void Arbol::BorrarHoja(nodo_t n){
             nodoHermanoIzquierdo->HermanoDerecho = nodoPadre;
             nodoHermanoIzquierdo->hijoFinal = true;
         }else{
-            cout << "Entre" << endl;
             //Es hijo "intermedio"
             nodoHermanoIzquierdo->HermanoDerecho = n->HermanoDerecho;
         }
@@ -158,7 +157,6 @@ nodo_t Arbol::Hijo(nodo_t n, int i){
         //cout << "diferente" << endl;
         return nodoAux;
     }else{
-        cout << "Igual" << endl;
         return nullptr;
     }  
 }
