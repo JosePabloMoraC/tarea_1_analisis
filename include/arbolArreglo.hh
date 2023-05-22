@@ -1,11 +1,14 @@
 #ifndef ARBOLHMIARREGLO_HH
 #define ARBOLHMIARREGLO_HH
 
-
-
 #include <iostream>
 using namespace std; 
 
+struct caja
+{
+    int Etiqueta;
+    int Padre;
+};
 
 
 typedef int nodo_t; // para el resto de los árboles, cambiar según el tipo nodo. Notar que aquí el tipo nodo es un entero;
@@ -14,7 +17,7 @@ class Arbol
 {
 private:
     int ultimo;
-    int arreglo[2][31]; //Consideramos un árbol con máximo 30 nodos. Primera fila es de etiquetas, segunda es el señalador al padre. 
+    caja arreglo[31]; //Consideramos un árbol con máximo 30 nodos. Primera fila es de etiquetas, segunda es el señalador al padre. 
 public:
     void Vaciar();
     bool Vacio();

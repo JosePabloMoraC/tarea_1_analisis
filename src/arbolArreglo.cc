@@ -17,11 +17,12 @@ bool Arbol::Vacio(){
     return false;
 }
 
+
 void Arbol::PonerRaiz(int e){
     //Raíz siempre va en la primera posición. Desperdiciamos un espacio en el array pero no necesitamos una variable
     //extra para diferenciar si el arreglo está vacio o no.
-    arreglo[1][1] = e;
-    arreglo[2][1] = -1;
+    arreglo[1].Etiqueta = e;
+    arreglo[1].Padre = -1;
     ultimo = 1;
 }
 
@@ -30,62 +31,62 @@ nodo_t Arbol::AgregarHijo(nodo_t n, int e, int k){
     //Debemos considerar que importa el orden de los hijos. 
     //Etiquetas
     int contadorHermanos = 0;
-    nodo_t nodoNuevo = -1;
-    nodo_t nodoActual = 2; //no consideramos a la raíz
-    nodo_t etiquetaAux = -1;
-    nodo_t etiquetaAux2 = -1;
+    nodo_t nodoNuevo;
+    int posicionActual = 2; //no consideramos a la raíz
+    int etiquetaAux = -1;
+    int etiquetaAux2 = -1;
     
-    while (nodoActual <= ultimo) 
+    while (posicionActual <= ultimo) 
     {
         //Si se encontró a un hermano
-        if(arreglo[2][nodoActual] == n){
+        if(arreglo[posicionActual].Padre == n){
             //si el hermano está en la posición k
             contadorHermanos++;
             if(contadorHermanos == k){
                 //Debemos insertar y realizar corrimientos
-                etiquetaAux = arreglo[1][nodoActual];
-                arreglo[1][nodoActual] = e;
-                nodoNuevo = nodoActual;
+                etiquetaAux = arreglo[posicionActual].Etiqueta;
+                arreglo[posicionActual].Etiqueta = e;
+                nodoNuevo = posicionActual;
 
             }else{
                 //Debemos continuar el corrimiento
                 if(contadorHermanos > k){
-                    etiquetaAux2 = arreglo[1][nodoActual];
-                    arreglo[1][nodoActual] = etiquetaAux;
+                    etiquetaAux2 = arreglo[posicionActual].Etiqueta;
+                    arreglo[posicionActual].Etiqueta = etiquetaAux;
                     etiquetaAux = etiquetaAux2;
                 }
             }
         }
-        nodoActual ++;
+        posicionActual ++;
     }
     ultimo++;
     if(etiquetaAux == -1){
         //En este caso el nodo nuevo se inserta en la posición final. Notar que no diferencia si K = numHijos + 1 o k > numHijos + 1 
-        arreglo[1][ultimo] = e;
-        arreglo[2][ultimo] = n;
-        cout << "Entre con etiqueta " << e << endl;
+        arreglo[ultimo].Etiqueta = e;
+        arreglo[ultimo].Padre = n;
         nodoNuevo = ultimo;
     }else{
         //Terminar el corrimiento
-        arreglo[1][ultimo] = etiquetaAux;
-        arreglo[2][ultimo] = n;
+        arreglo[ultimo].Etiqueta = etiquetaAux;
+        arreglo[ultimo].Padre = n;
     }
     return nodoNuevo;
 }
 
+
 void Arbol::BorrarHoja(nodo_t n){
     //Se deben realizar corrimientos 
-    nodo_t nodoActual = n;
-    while(nodoActual < ultimo){
-        arreglo[1][nodoActual] = arreglo[1][nodoActual + 1];
-        arreglo[2][nodoActual] = arreglo[2][nodoActual + 1];
-        nodoActual++;
+    nodo_t posicionActual = n;
+    while(posicionActual < ultimo){
+        arreglo[posicionActual].Etiqueta = arreglo[posicionActual + 1].Etiqueta;
+        arreglo[posicionActual].Padre = arreglo[posicionActual + 1].Padre;
+        posicionActual++;
     }
     ultimo--;
 }
 
 void Arbol::ModificarEtiqueta(nodo_t n, int e){
-    arreglo[1][n] = e;
+    arreglo[n].Etiqueta = e;
 }
 
 
@@ -93,82 +94,83 @@ nodo_t Arbol::Raiz(){
     return 1;
 }
 
+
 nodo_t Arbol::Hijo(nodo_t n, int i){
-    nodo_t nodoActual = n+1;
+    nodo_t posicionActual = n+1;
     nodo_t nodoHijo = -1;
     int contadorHijos = 0;
     bool continuar = true;
-    while (continuar && nodoActual <= ultimo)
+    while (continuar && posicionActual <= ultimo)
     {    
-        if(arreglo[2][nodoActual] == n){
+        if(arreglo[posicionActual].Padre == n){
             contadorHijos ++;
             if(contadorHijos == i){
                 continuar = false;
-                nodoHijo = nodoActual;
+                nodoHijo = posicionActual;
             } 
                 
         }
-        nodoActual ++;
+        posicionActual ++;
     }
-    return nodoHijo;
-    
+    return nodoHijo;   
 }
 
+
 nodo_t Arbol::Padre(nodo_t n){
-    return arreglo[2][n];
+    return arreglo[n].Padre;
 }
 
 nodo_t Arbol::HermanoDerecho(nodo_t n){
-    nodo_t nodoActual = n + 1;
+    nodo_t posicionActual = n + 1;
     nodo_t nodoPadre = Padre(n);
     bool continuar = true;
-    while(nodoActual <= ultimo && continuar){
-        if(arreglo[2][nodoActual] == nodoPadre){
+    while(posicionActual <= ultimo && continuar){
+        if(arreglo[posicionActual].Padre == nodoPadre){
             continuar = false;
         }else{
-            nodoActual++;
+            posicionActual++;
         }
     }
     if(!continuar){
-        return nodoActual;
+        return posicionActual;
     }else {
         return -1;
-    }
-    
+    }   
 }
-
 
 nodo_t Arbol::HermanoIzquierdo(nodo_t n){
-    nodo_t nodoActual = n - 1;
-    nodo_t nodoPadre = arreglo[2][n];
+    nodo_t posicionActual = n - 1;
+    nodo_t nodoPadre = arreglo[n].Padre;
     bool continuar = true;
-    while(nodoActual > 1 && continuar){
-        if(arreglo[2][nodoActual] == nodoPadre){
+    while(posicionActual > 1 && continuar){
+        if(arreglo[posicionActual].Padre == nodoPadre){
             continuar = false;
         }else{
-            nodoActual--;
+            posicionActual--;
         }
     }
     if(!continuar){
-        return nodoActual;
+        return posicionActual;
     }else {
         return -1;
     }
     
 }
 
+
 int Arbol::Etiqueta(nodo_t n){
-    return arreglo[1][n];
+    return arreglo[n].Etiqueta;
 }
 
+
 int Arbol::NumHijos(nodo_t n){
-    nodo_t nodoActual = n;
+    nodo_t posicionActual = n;
     int contadorHijos = 0;
-    while(nodoActual <= ultimo){
-        if(arreglo[2][nodoActual] == n){
+    while(posicionActual <= ultimo){
+        if(arreglo[posicionActual].Padre == n){
             contadorHijos++;
         }
-        nodoActual++;
+        posicionActual++;
     }
     return contadorHijos++;
 }
