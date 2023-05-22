@@ -1,12 +1,13 @@
 #ifndef TRADUCTOR_HH
 #define TRADUCTOR_HH
 
-#include <arbolHMI_HD.hh>
+#include <arbolArreglo.hh>
 
 #include <iostream>
 using namespace std; 
 class Traductor //Está clase despues se puede transformar en la encargada de manejar los algoritmos
 {
+    
 private:
     nodo_t BuscarRecursivo(nodo_t nodoActual, Arbol& arb, int etiqueta);
 public:
@@ -14,6 +15,7 @@ public:
     nodo_t Etiqueta_a_Nodo(int etiqueta, Arbol& arb);
     Traductor();
     ~Traductor();
+    
 
 };
 
