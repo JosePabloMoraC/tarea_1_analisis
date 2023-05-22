@@ -133,7 +133,7 @@ void Arbol::BorrarHoja(nodo_t n){
 }
 
 
-void Arbol::ModificaEtiqueta(nodo_t n, int e){
+void Arbol::ModificarEtiqueta(nodo_t n, int e){
     n->valor = e;
 }
 
@@ -219,10 +219,15 @@ int Arbol::Etiqueta(nodo_t n){
 int Arbol::NumHijos(nodo_t n){
     int contador = 0;
     nodo_t nodoAux = n->HijoMasIzquierdo;
-    while (nodoAux != nullptr)
+    bool continuar = true;
+    while (nodoAux != nullptr && continuar)
     {
+        if(nodoAux->hijoFinal == true){
+            continuar = false;
+        }
         nodoAux = nodoAux->HermanoDerecho;
         contador++;
+        
     }
     return contador; 
 }

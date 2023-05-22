@@ -130,7 +130,7 @@ void Arbol::BorrarHoja(nodo_t n){
 }
 
 
-void Arbol::ModificaEtiqueta(nodo_t n, int e){
+void Arbol::ModificarEtiqueta(nodo_t n, int e){
     n->valor = e;
 }
 

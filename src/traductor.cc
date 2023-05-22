@@ -8,11 +8,12 @@ Traductor::~Traductor()
 {
 }
 
+/*
 int Traductor::Nodo_a_Etiqueta(nodo_t n, Arbol& arb){
     return arb.Etiqueta(n);
 
 }
-
+*/
 nodo_t Traductor::Etiqueta_a_Nodo(int etiqueta, Arbol& arb){
     if(!arb.Vacio()){
        return BuscarRecursivo(arb.Raiz(), arb, etiqueta);

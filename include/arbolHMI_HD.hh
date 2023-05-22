@@ -29,7 +29,7 @@ public:
     void PonerRaiz(int e);
     nodo_t AgregarHijo(nodo_t n, int e, int k);
     void BorrarHoja(nodo_t n);
-    void ModificaEtiqueta(nodo_t n, int e);
+    void ModificarEtiqueta(nodo_t n, int e);
     nodo_t Raiz();
     nodo_t Hijo(nodo_t n, int i); 
     nodo_t Padre(nodo_t n); 
