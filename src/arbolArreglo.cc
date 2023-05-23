@@ -26,7 +26,7 @@ void Arbol::PonerRaiz(int e){
     ultimo = 1;
 }
 
-//Se asume que usuario es responsable y no va a agregar más de 30 nodos.
+//Se asume que usuario es responsable y no va a agregar más de 20 nodos.
 nodo_t Arbol::AgregarHijo(nodo_t n, int e, int k){
     //Debemos considerar que importa el orden de los hijos. 
     //Etiquetas

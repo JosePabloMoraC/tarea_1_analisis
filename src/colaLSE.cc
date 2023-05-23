@@ -8,6 +8,10 @@ Cola::Cola() : primero(NULL),
 {
 }
 
+void Cola::iniciar() {
+  Cola();
+}
+
 Cola::~Cola()
 {
   vaciar();

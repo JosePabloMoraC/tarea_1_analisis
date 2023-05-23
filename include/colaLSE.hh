@@ -15,6 +15,7 @@ class Cola {
     Caja *ultimo;
   public:
     Cola();
+    void iniciar();
     void vaciar();
     bool vacia();
     void agregar(int e);

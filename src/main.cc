@@ -24,7 +24,7 @@ void submenuCola(){
     cin >> respuestaC;
     switch (respuestaC) {
       case 1: cout << "Ha seleccionado iniciar" << endl;
-        c1 = Cola();
+        c1.iniciar();
         break;
       case 2: cout << "Ha seleccionado agregar" << endl;
         cout << "Digite el elemento a agregar: " << endl;

@@ -17,7 +17,7 @@ class Arbol
 {
 private:
     int ultimo;
-    caja arreglo[31]; //Consideramos un árbol con máximo 30 nodos. Primera fila es de etiquetas, segunda es el señalador al padre. 
+    caja arreglo[21]; //Consideramos un árbol con máximo 30 nodos. Primera fila es de etiquetas, segunda es el señalador al padre. 
 public:
     void Vaciar();
     bool Vacio();
