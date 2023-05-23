@@ -58,6 +58,7 @@ nodo_t Arbol::AgregarHijo(nodo_t n, int e, int k){ //se asume que método recibe
                 continuar = false;
             }else{
                 nodoAux = nodoAux->HermanoDerecho;
+                i++;
             }
         }
 

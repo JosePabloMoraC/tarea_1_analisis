@@ -7,6 +7,7 @@ Arbol::Arbol() : raiz(nullptr)
 Arbol::~Arbol()
 {
     Vaciar(); 
+    
 }
 
 
@@ -24,6 +25,7 @@ void Arbol::Vaciar(){
         }
         delete n;
     }
+    
  }
 
 bool Arbol::Vacio(){
@@ -39,52 +41,55 @@ void Arbol::PonerRaiz(int e){
     contadorNodos++;
 }
 
-nodo_t Arbol::AgregarHijo(nodo_t n, int e, int k){ //se asume que método recibe k valida. 
+
+nodo_t Arbol::AgregarHijo(nodo_t n, int e, int k) {
     nodo_t nuevoNodo = nullptr;
     nodo_t nodoAux = n->HijoMasIzquierdo;
     int etiquetaAux;
     bool continuar = true;
     int i = 1;
-    //Caso en que nodo n no tiene hijos 
-    if(nodoAux == nullptr && k == 1){
-        // asignamos al padre como "hermano derecho"
-        nuevoNodo = new caja{e, nullptr, n, true};
+    
+    // Caso en que el nodo n no tiene hijos
+    if (nodoAux == nullptr && k == 1) {
+        nuevoNodo = new caja{ e, nullptr, n, true }; // El último nodo apunta al padre
         n->HijoMasIzquierdo = nuevoNodo;
-    } else{
-
-        //Si el k no es valido, el programa se va a caer porque va a realizar nullptr->HermanoDerecho    
-        while (i < k && continuar){
-            //Este if es para poder diferencia cuando se insertar en la posición NumHijos o NumHijos + 1
-            if(nodoAux->hijoFinal == true){
+    } else {
+        while (i < k && continuar) {
+            if (nodoAux->hijoFinal == true) {
                 continuar = false;
-            }else{
+            } else {
                 nodoAux = nodoAux->HermanoDerecho;
             }
+            i++;
         }
 
-        if(!continuar){
-            //Insertar al final de la lista de hijos
-            nuevoNodo = new caja{e, nullptr, nodoAux->HermanoDerecho, true}; //HermanoDerecho es el padre
-            nodoAux->hijoFinal = false;
-
-        } else { 
-            //Hay que realizar desplazamientos 
+        if (!continuar) {
+            // Insertar al final de la lista de hijos
+            nuevoNodo = new caja{ e, nullptr, n, true }; // El último nodo apunta al padre
+            if (nodoAux != nullptr) {
+                nodoAux->hijoFinal = false;
+                nodoAux->HermanoDerecho = nuevoNodo;
+            } else {
+                n->HijoMasIzquierdo = nuevoNodo;
+            }
+        } else {
+            // Hay que realizar desplazamientos
             etiquetaAux = nodoAux->valor;
             nodoAux->valor = e;
-            //
-            if(nodoAux->hijoFinal == true){
-            //Caso en que es el "nodo final", por lo que hay que señalar al padre
-                nuevoNodo = new caja{etiquetaAux, nullptr, n, true};
+            
+            if (nodoAux->hijoFinal == true) {
+                // Caso en que es el "nodo final", por lo que hay que señalar al padre
+                nuevoNodo = new caja{ etiquetaAux, nullptr, n, true }; // El último nodo apunta al padre
                 nodoAux->hijoFinal = false;
-            }else {
-                //Caso en que no es el "nodo final"
-                nuevoNodo = new caja{etiquetaAux, nullptr, nodoAux->HermanoDerecho, false};
+                nodoAux->HermanoDerecho = nuevoNodo;
+            } else {
+                // Caso en que no es el "nodo final"
+                nuevoNodo = new caja{ etiquetaAux, nullptr, nodoAux->HermanoDerecho, false };
+                nodoAux->HermanoDerecho = nuevoNodo;
             }
-            //
         }
-        nodoAux->HermanoDerecho = nuevoNodo;
     }
-    contadorNodos++; 
+    contadorNodos++;
     return nuevoNodo;
 }
 
@@ -181,6 +186,13 @@ nodo_t Arbol::Padre(nodo_t n){
 }
 
 nodo_t Arbol::HermanoDerecho(nodo_t n){
+    if(n == raiz){
+        return nullptr;
+    }
+
+    if(n->hijoFinal == true){
+        return nullptr;
+    }
     return n->HermanoDerecho;
 }
 
