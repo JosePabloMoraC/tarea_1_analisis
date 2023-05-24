@@ -1,5 +1,5 @@
 #include <iostream>
-#include <ColaLSE.hh>
+#include <colaLSE.hh>
 #include <traductor.hh>
 
 using namespace std;
@@ -24,7 +24,7 @@ void submenuCola(){
     cin >> respuestaC;
     switch (respuestaC) {
       case 1: cout << "Ha seleccionado iniciar" << endl;
-        c1.iniciar();
+        c1 = Cola();
         break;
       case 2: cout << "Ha seleccionado agregar" << endl;
         cout << "Digite el elemento a agregar: " << endl;
@@ -57,7 +57,7 @@ void submenuCola(){
       case 8: cout << "Ha seleccionado salir" << endl, stop = true;
         c1.~Cola();
         break;
-      default: cout << "Respuesta inválida" << endl;
+      default: cout << "Respuesta inválida" << endl, stop = true;
     }
   }
 }
