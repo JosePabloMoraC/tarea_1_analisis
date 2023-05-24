@@ -66,7 +66,6 @@ void Cola::agregar(int e) {
   }
 }
 
-
 /**
  *  Efecto: Saca un elemento del frente de la cola
  * Requiere: Cola inicializada y no vacía. 
