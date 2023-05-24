@@ -1,16 +1,32 @@
+//Modelo Árbol utilizando la estructura de datos Lista de Hijos por Lista Simplemente Enlazada y Lista Simplemente Enlazada
+
 #include <arbolHMI_HD.hh>
 
+/*
+ * Efecto: Inicializa el Árbol.
+ * Requiere: Árbol no inicializado o Árbol destruido.
+ * Modifica: El Árbol.
+*/
 Arbol::Arbol() : raiz(nullptr)
 {
 }
 
+/**
+ * Efecto: Destruye el Árbol.
+ * Requiere: Árbol inicializado.
+ * Modifica: El Árbol.
+ */
 Arbol::~Arbol()
 {
     Vaciar(); 
     
 }
 
-
+/*
+ * Efecto: Vacía el Árbol.
+ * Requiere: Árbol inicializado.
+ * Modifica: El Árbol.
+*/
 void Arbol::Vaciar(){
     if(raiz != nullptr){
         VaciarRecursivo(raiz);
@@ -28,6 +44,11 @@ void Arbol::Vaciar(){
     
  }
 
+/*
+ * Efecto: Devuelve verdadero si el Árbol está vacío y falso si no.
+ * Requiere: Árbol inicializado.
+ * Modifica: N/A
+*/
 bool Arbol::Vacio(){
     if(raiz == nullptr){
         return true;
@@ -36,12 +57,23 @@ bool Arbol::Vacio(){
     }
 }
 
+/*
+ * Efecto: Crea la raíz del Árbol, con etiqueta e.
+ * Requiere: Árbol inicializado y vacío.
+ * Modifica: El Árbol.
+*/
 void Arbol::PonerRaiz(int e){
     raiz = new caja{e, nullptr, nullptr, false};
     contadorNodos++;
 }
 
-
+/*
+ * Efecto: Agrega un nodo hijo con la etiqueta e en la posición k de la lista de hijos del nodo n. 
+   Si la posición k está ocupada, todos los hijos con una posición mayor o igual a k se desplazan una posición 
+   hacia la derecha y se asigna la posición k al nuevo nodo.
+ * Requiere: Árbol inicializado, n válido en A, k mayor o igual a 1 y menor o igual al número de hijos + 1.
+ * Modifica: El Árbol.
+*/
 nodo_t Arbol::AgregarHijo(nodo_t n, int e, int k) {
     nodo_t nuevoNodo = nullptr;
     nodo_t nodoAux = n->HijoMasIzquierdo;
@@ -93,7 +125,11 @@ nodo_t Arbol::AgregarHijo(nodo_t n, int e, int k) {
     return nuevoNodo;
 }
 
-
+/*
+ * Efecto: Borra el nodo n del árbol. 
+ * Requiere: Árbol inicializado,  nodo n válido y sin hijos.
+ * Modifica: El Árbol.
+*/
 void Arbol::BorrarHoja(nodo_t n){
     if(n == raiz){
         //Liberamos la memoria 
@@ -137,17 +173,29 @@ void Arbol::BorrarHoja(nodo_t n){
     contadorNodos--;
 }
 
-
+/*
+ * Efecto: Cambia la etiqueta del nodo n al valor e. 
+ * Requiere: Árbol inicializado y nodo n válido en este.
+ * Modifica: El Árbol.
+*/
 void Arbol::ModificarEtiqueta(nodo_t n, int e){
     n->valor = e;
 }
 
-
+/*
+ * Efecto: Devuelve el nodo raíz del Árbol. Si está vacío devuelve 		 NodoNulo.
+ * Requiere: Árbol inicializado.
+ * Modifica: N/A
+*/
 nodo_t Arbol::Raiz(){
     return raiz;
 }
 
-//falta
+/*
+ * Efecto: Devuelve el i-esimo nodo hijo del nodo n. Si el i-esimo término no existe, devuelve NodoNulo. 
+ * Requiere: Árbol inicializado, n válido en A. 
+ * Modifica: N/A
+*/
 nodo_t Arbol::Hijo(nodo_t n, int i){
     nodo_t nodoAux = n->HijoMasIzquierdo;
     int contador = 1;
@@ -166,6 +214,12 @@ nodo_t Arbol::Hijo(nodo_t n, int i){
     }  
 }
 
+/*
+ * Padre(Arbol_T A, Nodo_T n)  nodo
+ * Efecto: Devuelve el padre de n. Si n es la raíz devuelve NodoNulo.
+ * Requiere: Árbol inicializado y n válida en este.
+ * Modifica: N/A
+*/
 nodo_t Arbol::Padre(nodo_t n){
     if(n == raiz){
         return nullptr;
@@ -185,6 +239,11 @@ nodo_t Arbol::Padre(nodo_t n){
     return nullptr;
 }
 
+/*
+ * Efecto: Devuelve el hermano derecho de n. Si no existe devuelve NodoNulo.
+ * Requiere: Árbol inicializado y n válida en este.
+ * Modifica: N/A
+*/
 nodo_t Arbol::HermanoDerecho(nodo_t n){
     if(n == raiz){
         return nullptr;
@@ -196,7 +255,11 @@ nodo_t Arbol::HermanoDerecho(nodo_t n){
     return n->HermanoDerecho;
 }
 
-//HermanoIzquierdo
+/*
+ * Efecto: Devuelve el hermano izquierdo de n. Si no existe devuelve NodoNulo.
+ * Requiere: Árbol inicializado y n válida en este.
+ * Modifica: N/A
+*/
 nodo_t Arbol::HermanoIzquierdo(nodo_t n){
     if(n == raiz){
         return nullptr;
@@ -222,12 +285,20 @@ nodo_t Arbol::HermanoIzquierdoAux(nodo_t n, nodo_t padre){
     return nodoAux;
 }
 
-
+/*
+ * Efecto: Devuelve la etiqueta de n.
+ * Requiere: Árbol inicializado y n válida en este.
+ * Modifica: N/A
+*/
 int Arbol::Etiqueta(nodo_t n){
     return n->valor;
 }
 
-//NumHijos
+/*
+ * Efecto: Devuelve la cantidad de hijos de n.
+ * Requiere: Árbol inicializado y n válida en este.
+ * Modifica: N/A
+*/
 int Arbol::NumHijos(nodo_t n){
     int contador = 0;
     nodo_t nodoAux = n->HijoMasIzquierdo;
@@ -264,44 +335,5 @@ nodo_t Arbol::NodoNulo(){
     return nullptr;
 }
 
-/*
-Creo que nos puede ayudar para la siguiente parte de la tarea 
-nodo_t Arbol::Padre(nodo_t n){
-    if(n == raiz){
-        return nullptr;
-    } else {
-        return (PadreRecursivo(n, raiz));
-    }
-}
 
-nodo_t Arbol::PadreRecursivo(nodo_t n_buscado, nodo_t n_actual){
-    //if(n == nullptr){
-      //  return nullptr;
-    //}
-
-    nodo_t cajaHijo = n_actual->HijoMasIzquierdo;
-    nodo_t cajaPadre;
-
-    //if(cajaHijo == n_buscado){
-      //  return n_actual;
-    //}
-
-    while(cajaHijo != nullptr){
-        if(cajaHijo == n_buscado){
-            return n_actual;
-        }
-
-        cajaPadre = PadreRecursivo(n_buscado, cajaHijo);
-
-        if(cajaPadre != nullptr){
-            return cajaPadre;
-        }
-
-        cajaHijo = cajaHijo->HermanoDerecho;
-
-    }
-
-    return nullptr;
-}
-*/
 
