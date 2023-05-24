@@ -183,7 +183,7 @@ void Arbol::ModificarEtiqueta(nodo_t n, int e){
 }
 
 /*
- * Efecto: Devuelve el nodo raíz del Árbol. Si está vacío devuelve 		 NodoNulo.
+ * Efecto: Devuelve el nodo raíz del Árbol. Si está vacío devuelve NodoNulo.
  * Requiere: Árbol inicializado.
  * Modifica: N/A
 */
@@ -315,7 +315,11 @@ int Arbol::NumHijos(nodo_t n){
     return contador; 
 }
 
-//NumNodos
+/**
+ * Efecto: Devuelve la cantidad de nodos del Árbol.
+ * Requiere: Árbol inicializado.
+ * Modifica: N/A
+ */
 int Arbol::NumNodos(){
     return contadorNodos;
 }
