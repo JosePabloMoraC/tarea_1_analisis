@@ -213,6 +213,8 @@ int main () {
   //Nodos Hijos de 130
   a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 240, 1);
   a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 250, 2);
+
+    cout << "La cantidad de niveles del árbol es: " << nivelesArbol(a1) << endl;
   //Nodos Hijos de 200
   a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 300, 1); 
   a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 310, 2); 
@@ -220,6 +222,8 @@ int main () {
 
   //"Pruebas" 
   etiquetasHermanos(a1.Hijo(a1.Raiz(), 3), a1);
+  cout << endl;
+  cout << "La cantidad de niveles del árbol es: " << nivelesArbol(a1) << endl;
   cout << endl;
   cout << "Final árbol" << endl;
   /*

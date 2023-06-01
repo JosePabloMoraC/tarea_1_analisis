@@ -76,6 +76,9 @@ TEST(Arboles, BorrarHoja){
 }
 
 */
+
+
+// Pruebas de los algoritmos
 TEST(Algoritmos, ListarHermanos){
    //Árbol de prueba
   Arbol a1 = Arbol();
@@ -115,34 +118,6 @@ TEST(Algoritmos, ListarHermanos){
   std::string outputStr = output.str();
   EXPECT_EQ(outputStr, "La lista de Hermanos es: 120 130 140 ");
 
-
-   /*
-   //Restaurar el búfer de std::cout 
-  std::cout.rdbuf(std::cout.rdbuf());
-
-   //Llamar al algoritmo
-  etiquetasHermanos(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 3), a1);
-   
-   //Restaurar la salida estándar original
-  std::cout.rdbuf(oldCoutBuffer);
-
-  //Comparar
-  outputStr = output.str();
-  EXPECT_EQ(outputStr, "La lista de Hermanos es: 200 210 ");
-   
-   //Restaurar el búfer de std::cout 
-  std::cout.rdbuf(std::cout.rdbuf());
-
-   //Llamar al algoritmo
-  etiquetasHermanos(a1.Hijo(a1.Hijo(a1.Raiz(), 4), 1), a1);
-   
-   //Restaurar la salida estándar original
-  std::cout.rdbuf(oldCoutBuffer);
-
-  //Comparar
-  outputStr = output.str();
-  EXPECT_EQ(outputStr, "!La lista de Hermanos es: ");
-*/
 }
 
 TEST(Algoritmos, ListarHermanos2){
@@ -226,6 +201,35 @@ TEST(Algoritmos, ListarHermanos3){
   EXPECT_EQ(outputStr, "La lista de Hermanos es: ");
 }
 
+TEST(Algoritmos, cantidadHermanos){
+  //Árbol de prueba
+  Arbol a1 = Arbol();
+  //Raíz
+  a1.PonerRaiz(100);
+  EXPECT_EQ(nivelesArbol(a1), 1);
+  //Nivel 1 
+  a1.AgregarHijo(a1.Raiz(), 110, 1);
+  a1.AgregarHijo(a1.Raiz(), 120, 2);
+  a1.AgregarHijo(a1.Raiz(), 130, 3);
+  a1.AgregarHijo(a1.Raiz(), 140, 4);
+  EXPECT_EQ(nivelesArbol(a1), 2);
+  //Nivel 2
+  //Nodos hijos de 110
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 200, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 210, 2);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 220, 3);
+  //Nodos Hijos de 120 
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 2), 230, 1);
+  //Nodos Hijos de 130
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 240, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 250, 2);
+  EXPECT_EQ(nivelesArbol(a1), 3);
+  //Nivel 3
+  //Nodos Hijos de 200
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 300, 1); 
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 310, 2); 
+  EXPECT_EQ(nivelesArbol(a1), 4);
+}
 
 TEST(Arboles, Stop) {
     std::cin.ignore();

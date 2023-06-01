@@ -13,3 +13,30 @@ void etiquetasHermanos(nodo_t n,  Arbol& a){
     nodoAux = a.HermanoDerecho(nodoAux);
   }
 }
+
+//Requiere árbol inicializado 
+int nivelesArbol(Arbol& a){
+  int niveles = 0;
+  if(a.Raiz() != a.NodoNulo()){
+    nivelesArbolRecursivo(a.Raiz(), 1, a, niveles); //Se pasa niveles por referencia 
+  }
+
+return niveles;
+}
+
+void nivelesArbolRecursivo(nodo_t nodoActual, int nivelActual, Arbol& a, int& nNiveles){
+  if(nivelActual > nNiveles){
+    nNiveles = nivelActual;
+  }
+  nodo_t nodoHijo = a.Hijo(nodoActual, 1); //Hijo más izquierdo
+  //Para este caso, no queda de otra que recorrer todo el árbol
+  while(nodoHijo != a.NodoNulo()){
+    nivelesArbolRecursivo(nodoHijo, nivelActual + 1, a, nNiveles);
+    nodoHijo = a.HermanoDerecho(nodoHijo);
+  }
+}
+
+
+
+
+
