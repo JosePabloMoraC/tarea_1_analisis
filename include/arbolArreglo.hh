@@ -1,5 +1,5 @@
-#ifndef ARBOLHMIARREGLO_HH
-#define ARBOLHMIARREGLO_HH
+#ifndef ARBOLARREGLO_HH
+#define ARBOLARREGLO_HH
 
 #include <iostream>
 using namespace std; 

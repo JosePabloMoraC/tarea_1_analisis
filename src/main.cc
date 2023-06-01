@@ -1,10 +1,10 @@
 #include <iostream>
 #include <colaLSE.hh>
-#include <traductor.hh>
+#include <algoritmos.hh>
 
 using namespace std;
 
-
+/*
 void submenuCola(){
   int respuestaC;
   bool stop = false;
@@ -190,8 +190,39 @@ void submenuArbol(){
     }
   }
 }
+*/
+
 
 int main () {
+  cout << "Hola mundo" << endl;
+  Arbol a1 = Arbol();
+  //Raíz
+  a1.PonerRaiz(100);
+  //Nivel 1 
+  a1.AgregarHijo(a1.Raiz(), 110, 1);
+  a1.AgregarHijo(a1.Raiz(), 120, 2);
+  a1.AgregarHijo(a1.Raiz(), 130, 3);
+  a1.AgregarHijo(a1.Raiz(), 140, 4);
+  //Nivel 2
+  //Nodos hijos de 110
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 200, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 210, 2);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 220, 3);
+  //Nodos Hijos de 120 
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 2), 230, 1);
+  //Nodos Hijos de 130
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 240, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 250, 2);
+  //Nodos Hijos de 200
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 300, 1); 
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 310, 2); 
+
+
+  //"Pruebas" 
+  etiquetasHermanos(a1.Hijo(a1.Raiz(), 3), a1);
+  cout << endl;
+  cout << "Final árbol" << endl;
+  /*
   int respuesta;
   cout <<  "****  MENU  ***" << endl;
   cout << "1) Desea utilizar el modelo Arbol" << endl;
@@ -209,6 +240,6 @@ int main () {
     break;
     default: cout << "Respuesta inválida" << endl;
   }
-
+*/
   return 0;
 }
