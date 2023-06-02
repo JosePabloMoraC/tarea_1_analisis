@@ -288,10 +288,52 @@ TEST(Algoritmos, alturaNodo){
   //Nodos Hijos de 200
   a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 300, 1); 
   a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 310, 2); 
+  
   EXPECT_EQ(alturaNodo(a1.Raiz(), a1), 3); 
   EXPECT_EQ(alturaNodo(a1.Hijo(a1.Raiz(), 1), a1), 2);
   EXPECT_EQ(alturaNodo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), a1), 1);
   EXPECT_EQ(alturaNodo(a1.Hijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 1), a1), 0);
+}
+
+TEST(Algoritmos, existeEtiqueta){
+   //Árbol de prueba
+  Arbol a1 = Arbol();
+  //Raíz
+  a1.PonerRaiz(100);
+  
+  //Nivel 1 
+  a1.AgregarHijo(a1.Raiz(), 110, 1);
+  a1.AgregarHijo(a1.Raiz(), 120, 2);
+  a1.AgregarHijo(a1.Raiz(), 130, 3);
+  a1.AgregarHijo(a1.Raiz(), 140, 4);
+  //Nivel 2
+  //Nodos hijos de 110
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 200, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 210, 2);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 220, 3);
+  //Nodos Hijos de 120 
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 2), 230, 1);
+  //Nodos Hijos de 130
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 240, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 250, 2);
+  //Nivel 3
+  //Nodos Hijos de 200
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 300, 1); 
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 310, 2); 
+  
+  EXPECT_EQ(existeEtiqueta(100, a1), true); 
+  EXPECT_EQ(existeEtiqueta(110, a1), true); 
+  EXPECT_EQ(existeEtiqueta(130, a1), true); 
+  EXPECT_EQ(existeEtiqueta(140, a1), true); 
+  EXPECT_EQ(existeEtiqueta(200, a1), true); 
+  EXPECT_EQ(existeEtiqueta(250, a1), true); 
+  EXPECT_EQ(existeEtiqueta(300, a1), true);
+  EXPECT_EQ(existeEtiqueta(90, a1), false);  
+  EXPECT_EQ(existeEtiqueta(150, a1), false); 
+  EXPECT_EQ(existeEtiqueta(270, a1), false); 
+  EXPECT_EQ(existeEtiqueta(311, a1), false); 
+  EXPECT_EQ(existeEtiqueta(500, a1), false); 
+  EXPECT_EQ(existeEtiqueta(1000, a1), false); 
 }
 
 

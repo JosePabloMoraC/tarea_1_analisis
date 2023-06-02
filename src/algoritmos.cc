@@ -77,3 +77,23 @@ int alturaNodo(nodo_t n, Arbol& a){
 }
 
 
+bool existeEtiqueta(int e, Arbol& a){
+  bool pertenece = false; 
+  if(a.Raiz() != a.NodoNulo()){
+    existeEtiquetaRecursivo(a.Raiz(), e, a, pertenece);
+  }
+
+  return pertenece;
+}
+
+void existeEtiquetaRecursivo(nodo_t nodoActual, int e, Arbol& a, bool& pertenece){
+  if(e == a.Etiqueta(nodoActual)){
+    pertenece = true;
+  } else{
+    nodo_t nodoHijo = a.Hijo(nodoActual, 1); //Hijo más izquierdo
+    while(nodoHijo != a.NodoNulo() && pertenece == false){
+      existeEtiquetaRecursivo(nodoHijo, e, a, pertenece);
+      nodoHijo = a.HermanoDerecho(nodoHijo);
+    }
+  }
+}

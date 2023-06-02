@@ -13,5 +13,8 @@ void profundidadRecursivo(nodo_t nodoBuscado, nodo_t nodoActual, int profundidad
 
 int alturaNodo(nodo_t n, Arbol& a);
 
+bool existeEtiqueta(int e, Arbol& a);
+void existeEtiquetaRecursivo(nodo_t nodoActual, int e, Arbol& a, bool& pertenece);
+
 
 #endif  ALGORITMOS_HH

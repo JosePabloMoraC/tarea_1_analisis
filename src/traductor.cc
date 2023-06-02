@@ -32,7 +32,7 @@ nodo_t Traductor::BuscarRecursivo(nodo_t nodoActual, Arbol& arb, int etiqueta){
         while(nodoHijo != arb.NodoNulo()){
             nodoEncontrado = BuscarRecursivo(nodoHijo, arb, etiqueta);
             if(nodoEncontrado != arb.NodoNulo()){
-                return nodoEncontrado;
+                return nodoEncontrado; //Retorna el valor y detiene el bucle
             }
             nodoHijo = arb.HermanoDerecho(nodoHijo);
         }
