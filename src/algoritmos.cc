@@ -35,7 +35,33 @@ void nivelesArbolRecursivo(nodo_t nodoActual, int nivelActual, Arbol& a, int& nN
     nodoHijo = a.HermanoDerecho(nodoHijo);
   }
 }
+//Arbol inicializado y n valido en a
+int profundidadNodo(nodo_t n, Arbol& a){
+  int profundidad = 0;
 
+  //Notar que si consideramos unicamente los operadores del modelo, tenemos dos opciones.
+  //La primera consiste llevar un contador e ir llamando al nodo padre hasta la raíz. Pero sabemos que está implementación es muy
+  //ineficiente para algúnas estructruas en que Padre() es O(n). Por lo tanto, vamos a recorrer el árbol para encontrar al nodo actual. 
+  //Se podría realizar en post-orden o por niveles. Notar que la escencia de la implementación es similar a la de Etiqueta_a_Nodo de la clase traductor.
+  if(n != a.Raiz()){
+    // Se le asigna a la raíz una profundidad de 0
+    profundidadRecursivo(n, a.Raiz(), 0, a, profundidad);
+  }
+
+  return profundidad;
+}
+
+void profundidadRecursivo(nodo_t nodoBuscado, nodo_t nodoActual, int profundidadActual, Arbol& a, int& profundidad){
+  if(nodoActual == nodoBuscado){
+    profundidad = profundidadActual;
+  }else{
+    nodo_t nodoHijo = a.Hijo(nodoActual, 1); //Hijo más izquierdo
+    while(nodoHijo != a.NodoNulo() && profundidad == 0){ //Con profundidad == 0 nos aseguramos de detener el bucle cuando se encontró el nodoBuscado. Notar que profundidad solo se debe modificar 1 vez
+      profundidadRecursivo(nodoBuscado, nodoHijo, profundidadActual + 1, a, profundidad);
+      nodoHijo = a.HermanoDerecho(nodoHijo);
+    }
+  }
+}
 
 
 

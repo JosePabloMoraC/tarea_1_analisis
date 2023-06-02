@@ -8,5 +8,8 @@ void etiquetasHermanos(nodo_t n, Arbol& a);
 int nivelesArbol(Arbol& a);
 void nivelesArbolRecursivo(nodo_t nodoActual, int nivelActual, Arbol& a, int& nNiveles);
 
+int profundidadNodo(nodo_t n, Arbol& a);
+void profundidadRecursivo(nodo_t nodoBuscado, nodo_t nodoActual, int profundidadActual, Arbol& a, int& profundidad);
+
 
 #endif  ALGORITMOS_HH
