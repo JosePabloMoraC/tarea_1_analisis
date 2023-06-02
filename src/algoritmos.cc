@@ -35,7 +35,7 @@ void nivelesArbolRecursivo(nodo_t nodoActual, int nivelActual, Arbol& a, int& nN
     nodoHijo = a.HermanoDerecho(nodoHijo);
   }
 }
-//Arbol inicializado y n valido en a
+//Arbol inicializado y n valido en a, con raiz
 int profundidadNodo(nodo_t n, Arbol& a){
   int profundidad = 0;
 
@@ -63,6 +63,17 @@ void profundidadRecursivo(nodo_t nodoBuscado, nodo_t nodoActual, int profundidad
   }
 }
 
+//Arbol inicializado y n valido, con raiz 
+int alturaNodo(nodo_t n, Arbol& a){
+  int altura = 0;
+  //notar que el problema a resolver es el mismo que ya resuelve nivelesArbolRecursivo(), por lo que podemos reutilizar está función.
+  //(nodo_t nodoActual, int nivelActual, Arbol& a, int& nNiveles);
+  //Primero revisamos que n tenga hijos y despues llamamos a la función recursiva
+  if(a.Hijo(n, 1) != a.NodoNulo()){
+      nivelesArbolRecursivo(n, 0, a, altura);
+  }
 
+  return altura;
+}
 
 

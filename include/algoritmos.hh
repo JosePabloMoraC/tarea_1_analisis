@@ -11,5 +11,7 @@ void nivelesArbolRecursivo(nodo_t nodoActual, int nivelActual, Arbol& a, int& nN
 int profundidadNodo(nodo_t n, Arbol& a);
 void profundidadRecursivo(nodo_t nodoBuscado, nodo_t nodoActual, int profundidadActual, Arbol& a, int& profundidad);
 
+int alturaNodo(nodo_t n, Arbol& a);
+
 
 #endif  ALGORITMOS_HH
