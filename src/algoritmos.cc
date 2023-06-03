@@ -50,6 +50,43 @@ void etiquetasNivel(int nivel, Arbol& a){
 }
 
 
+Arbol copiarArbol(Arbol& a1){
+  Arbol a2 = Arbol();
+  if(!a1.Vacio()){
+    //Colas que vamos a usar para a1 y a2 
+    Cola<nodo_t> colaA1;
+    Cola<nodo_t> colaA2;
+    nodo_t nodoAux1;
+    nodo_t nodoAux2;
+    nodo_t nodoAuxHijo2;
+
+    //Le ponemos raíz a a2
+    //Notar que se copiar las etiquetas, no los nodos. Pero lo que se encola con nodos. 
+    a2.PonerRaiz(a1.Etiqueta(a1.Raiz()));
+    //Encolamos ambas raíces 
+    colaA1.agregar(a1.Raiz());
+    colaA2.agregar(a2.Raiz());
+    int i = 1;
+    while(!colaA1.vacia()){
+      //sacanmos el primer elemento de ambas colas
+      nodoAux1 = colaA1.sacar();
+      nodoAux2 = colaA2.sacar();
+      //hijo máz izquierdo de nodoAux1
+      nodoAux1 = a1.Hijo(nodoAux1, 1);
+      while(nodoAux1 != a1.NodoNulo()){
+        //Agregamos hijo en la ultima posición
+        nodoAuxHijo2 = a2.AgregarHijo(nodoAux2, a1.Etiqueta(nodoAux1), a2.NumHijos(nodoAux2) + 1);
+
+        //Encolamos
+        colaA1.agregar(nodoAux1);
+        colaA2.agregar(nodoAuxHijo2);
+        nodoAux1 = a1.HermanoDerecho(nodoAux1);
+      }
+      i ++;
+    }
+  }
+  return a2;
+}
 
 
 //Requiere árbol inicializado 

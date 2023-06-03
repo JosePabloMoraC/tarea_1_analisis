@@ -13,7 +13,7 @@ void nivelesArbolRecursivo(nodo_t nodoActual, int nivelActual, Arbol& a, int& nN
 
 bool etiquetasRepetidas(Arbol& a);
 
-void copiar(Arbol& a, Arbol& b);
+Arbol copiarArbol(Arbol& a1);
 
 bool iguales(Arbol& a, Arbol& b);
 

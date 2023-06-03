@@ -500,6 +500,49 @@ TEST(Algoritmos, existeEtiqueta){
   EXPECT_EQ(existeEtiqueta(1000, a1), false); 
 }
 
+TEST(Algoritmos, copiarArbol){
+      //Árbol de prueba
+  Arbol a1 = Arbol();
+  //Raíz
+  a1.PonerRaiz(100);
+  
+  //Nivel 1 
+  a1.AgregarHijo(a1.Raiz(), 110, 1);
+  a1.AgregarHijo(a1.Raiz(), 120, 2);
+  a1.AgregarHijo(a1.Raiz(), 130, 3);
+  a1.AgregarHijo(a1.Raiz(), 140, 4);
+  //Nivel 2
+  //Nodos hijos de 110
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 200, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 210, 2);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 220, 3);
+  //Nodos Hijos de 120 
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 2), 230, 1);
+  //Nodos Hijos de 130
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 240, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 250, 2);
+  //Nivel 3
+  //Nodos Hijos de 200
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 300, 1); 
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 310, 2); 
+  
+  Arbol a2 = copiarArbol(a1);
+  //Primer nivel
+  EXPECT_EQ(a1.Etiqueta(a1.Raiz()), a1.Etiqueta(a1.Raiz()));
+  //Segundo nivel
+  EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Raiz(), 1)), a2.Etiqueta(a2.Hijo(a2.Raiz(), 1)));
+  EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Raiz(), 2)), a2.Etiqueta(a2.Hijo(a2.Raiz(), 2)));
+  EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Raiz(), 3)), a2.Etiqueta(a2.Hijo(a2.Raiz(), 3)));
+  EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Raiz(), 4)), a2.Etiqueta(a2.Hijo(a2.Raiz(), 4)));
+  //Tercer nivel
+  EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1)), a2.Etiqueta(a1.Hijo(a2.Hijo(a2.Raiz(), 1), 1)));
+  EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 2)), a2.Etiqueta(a1.Hijo(a2.Hijo(a2.Raiz(), 1), 2)));
+  EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 3)), a2.Etiqueta(a1.Hijo(a2.Hijo(a2.Raiz(), 1), 3)));
+  EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Hijo(a1.Raiz(), 3), 2)), a2.Etiqueta(a1.Hijo(a2.Hijo(a2.Raiz(), 3), 2)));
+  //Cuarto nivel
+  EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 1)), a2.Etiqueta(a1.Hijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 1)));
+  EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 2)), a2.Etiqueta(a1.Hijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 2)));
+}
 
 TEST(Arboles, Stop) {
     std::cin.ignore();
