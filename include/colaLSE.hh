@@ -109,9 +109,8 @@ T Cola<T>::sacar() {
   primero = primero->next;
   if(primero == NULL) {
     ultimo = NULL;
-  }else{
-    largo--;
   }
+  largo--;
   delete(temp);
   return resultado;
 }

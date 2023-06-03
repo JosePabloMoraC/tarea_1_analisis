@@ -14,6 +14,44 @@ void etiquetasHermanos(nodo_t n,  Arbol& a){
   }
 }
 
+void etiquetasNivel(int nivel, Arbol& a){
+  if(!a.Vacio()){
+    Cola<nodo_t> c1;
+    nodo_t nodoHijo;
+    int tamanoCola;
+    int j = 1; // Se considera la raíz como el nivel 1 
+    cout << "Las etiquetas de los nodos en el nivel " << nivel << " son: ";
+    if(nivel == 1){
+      cout << a.Etiqueta(a.Raiz()) << " ";
+    } else {
+        c1.agregar(a.Raiz());
+        while(!c1.vacia()){
+          j++;
+          tamanoCola = c1.getLargo();
+          //Notar que está implementación evita tener dos colas (o una cola de structs).
+          //Notar que el ciclo for itera sobre todos los elementos de un nivel. Cuando termina el for, 
+          //en la cola solo quedan elementos del siguiente nivel. Por lo que pedir getLargo() es análogo a consultar la 
+          //cantidad de elementos en el nivel.
+          for(int i = 0; i < tamanoCola; i++){
+            nodoHijo = a.Hijo(c1.sacar(), 1); //Hijo más izquierdo
+            while (nodoHijo != a.NodoNulo())
+            {
+              if(j == nivel){
+                cout << a.Etiqueta(nodoHijo) << " ";
+              } else {
+                c1.agregar(nodoHijo);
+              }
+              nodoHijo = a.HermanoDerecho(nodoHijo);
+            }  
+          }
+        }
+      }
+    }
+}
+
+
+
+
 //Requiere árbol inicializado 
 int nivelesArbol(Arbol& a){
   int niveles = 0;

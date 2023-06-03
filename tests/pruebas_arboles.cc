@@ -201,6 +201,170 @@ TEST(Algoritmos, ListarHermanos3){
   EXPECT_EQ(outputStr, "La lista de Hermanos es: ");
 }
 
+TEST(Algoritmos, etiquetasNivel1){
+   //Árbol de prueba
+  Arbol a1 = Arbol();
+  //Raíz
+  a1.PonerRaiz(100);
+  
+  //Nivel 1 
+  a1.AgregarHijo(a1.Raiz(), 110, 1);
+  a1.AgregarHijo(a1.Raiz(), 120, 2);
+  a1.AgregarHijo(a1.Raiz(), 130, 3);
+  a1.AgregarHijo(a1.Raiz(), 140, 4);
+  //Nivel 2
+  //Nodos hijos de 110
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 200, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 210, 2);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 220, 3);
+  //Nodos Hijos de 120 
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 2), 230, 1);
+  //Nodos Hijos de 130
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 240, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 250, 2);
+  //Nivel 3
+  //Nodos Hijos de 200
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 300, 1); 
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 310, 2); 
+
+  //Salida estándar a un stringstream
+  std::stringstream output;
+  std::streambuf* oldCoutBuffer = std::cout.rdbuf(output.rdbuf());
+
+  // Llamar al algoritmo
+  etiquetasNivel(1, a1);
+
+  // Restaurar la salida estándar original
+  std::cout.rdbuf(oldCoutBuffer);
+
+  //Comparar
+  std::string outputStr = output.str();
+  EXPECT_EQ(outputStr, "Las etiquetas de los nodos en el nivel 1 son: 100 ");
+}
+
+TEST(Algoritmos, etiquetasNivel2){
+  //Árbol de prueba
+  Arbol a1 = Arbol();
+  //Raíz
+  a1.PonerRaiz(100);
+  
+  //Nivel 1 
+  a1.AgregarHijo(a1.Raiz(), 110, 1);
+  a1.AgregarHijo(a1.Raiz(), 120, 2);
+  a1.AgregarHijo(a1.Raiz(), 130, 3);
+  a1.AgregarHijo(a1.Raiz(), 140, 4);
+  //Nivel 2
+  //Nodos hijos de 110
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 200, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 210, 2);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 220, 3);
+  //Nodos Hijos de 120 
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 2), 230, 1);
+  //Nodos Hijos de 130
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 240, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 250, 2);
+  //Nivel 3
+  //Nodos Hijos de 200
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 300, 1); 
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 310, 2); 
+
+  //Salida estándar a un stringstream
+  std::stringstream output;
+  std::streambuf* oldCoutBuffer = std::cout.rdbuf(output.rdbuf());
+
+  // Llamar al algoritmo
+  etiquetasNivel(2, a1);
+
+  // Restaurar la salida estándar original
+  std::cout.rdbuf(oldCoutBuffer);
+
+  //Comparar
+  std::string outputStr = output.str();
+  EXPECT_EQ(outputStr, "Las etiquetas de los nodos en el nivel 2 son: 110 120 130 140 ");
+}
+
+TEST(Algoritmos, etiquetasNivel3){
+  //Árbol de prueba
+  Arbol a1 = Arbol();
+  //Raíz
+  a1.PonerRaiz(100);
+  
+  //Nivel 1 
+  a1.AgregarHijo(a1.Raiz(), 110, 1);
+  a1.AgregarHijo(a1.Raiz(), 120, 2);
+  a1.AgregarHijo(a1.Raiz(), 130, 3);
+  a1.AgregarHijo(a1.Raiz(), 140, 4);
+  //Nivel 2
+  //Nodos hijos de 110
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 200, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 210, 2);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 220, 3);
+  //Nodos Hijos de 120 
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 2), 230, 1);
+  //Nodos Hijos de 130
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 240, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 250, 2);
+  //Nivel 3
+  //Nodos Hijos de 200
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 300, 1); 
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 310, 2); 
+
+  //Salida estándar a un stringstream
+  std::stringstream output;
+  std::streambuf* oldCoutBuffer = std::cout.rdbuf(output.rdbuf());
+
+  // Llamar al algoritmo
+  etiquetasNivel(3, a1);
+
+  // Restaurar la salida estándar original
+  std::cout.rdbuf(oldCoutBuffer);
+
+  //Comparar
+  std::string outputStr = output.str();
+  EXPECT_EQ(outputStr, "Las etiquetas de los nodos en el nivel 3 son: 200 210 220 230 240 250 ");
+}
+
+TEST(Algoritmos, etiquetasNivel4){
+  //Árbol de prueba
+  Arbol a1 = Arbol();
+  //Raíz
+  a1.PonerRaiz(100);
+  
+  //Nivel 1 
+  a1.AgregarHijo(a1.Raiz(), 110, 1);
+  a1.AgregarHijo(a1.Raiz(), 120, 2);
+  a1.AgregarHijo(a1.Raiz(), 130, 3);
+  a1.AgregarHijo(a1.Raiz(), 140, 4);
+  //Nivel 2
+  //Nodos hijos de 110
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 200, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 210, 2);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 220, 3);
+  //Nodos Hijos de 120 
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 2), 230, 1);
+  //Nodos Hijos de 130
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 240, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 250, 2);
+  //Nivel 3
+  //Nodos Hijos de 200
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 300, 1); 
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 310, 2); 
+
+  //Salida estándar a un stringstream
+  std::stringstream output;
+  std::streambuf* oldCoutBuffer = std::cout.rdbuf(output.rdbuf());
+
+  // Llamar al algoritmo
+  etiquetasNivel(4, a1);
+
+  // Restaurar la salida estándar original
+  std::cout.rdbuf(oldCoutBuffer);
+
+  //Comparar
+  std::string outputStr = output.str();
+  EXPECT_EQ(outputStr, "Las etiquetas de los nodos en el nivel 4 son: 300 310 ");
+}
+
 TEST(Algoritmos, cantidadNiveles){
   //Árbol de prueba
   Arbol a1 = Arbol();
