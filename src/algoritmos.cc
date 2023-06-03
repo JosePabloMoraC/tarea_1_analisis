@@ -50,45 +50,6 @@ void etiquetasNivel(int nivel, Arbol& a){
 }
 
 
-Arbol copiarArbol(Arbol& a1){
-  Arbol a2 = Arbol();
-  if(!a1.Vacio()){
-    //Colas que vamos a usar para a1 y a2 
-    Cola<nodo_t> colaA1;
-    Cola<nodo_t> colaA2;
-    nodo_t nodoAux1;
-    nodo_t nodoAux2;
-    nodo_t nodoAuxHijo2;
-
-    //Le ponemos raíz a a2
-    //Notar que se copiar las etiquetas, no los nodos. Pero lo que se encola con nodos. 
-    a2.PonerRaiz(a1.Etiqueta(a1.Raiz()));
-    //Encolamos ambas raíces 
-    colaA1.agregar(a1.Raiz());
-    colaA2.agregar(a2.Raiz());
-    int i = 1;
-    while(!colaA1.vacia()){
-      //sacanmos el primer elemento de ambas colas
-      nodoAux1 = colaA1.sacar();
-      nodoAux2 = colaA2.sacar();
-      //hijo máz izquierdo de nodoAux1
-      nodoAux1 = a1.Hijo(nodoAux1, 1);
-      while(nodoAux1 != a1.NodoNulo()){
-        //Agregamos hijo en la ultima posición
-        nodoAuxHijo2 = a2.AgregarHijo(nodoAux2, a1.Etiqueta(nodoAux1), a2.NumHijos(nodoAux2) + 1);
-
-        //Encolamos
-        colaA1.agregar(nodoAux1);
-        colaA2.agregar(nodoAuxHijo2);
-        nodoAux1 = a1.HermanoDerecho(nodoAux1);
-      }
-      i ++;
-    }
-  }
-  return a2;
-}
-
-
 //Requiere árbol inicializado 
 int nivelesArbol(Arbol& a){
   int niveles = 0;
@@ -110,6 +71,103 @@ void nivelesArbolRecursivo(nodo_t nodoActual, int nivelActual, Arbol& a, int& nN
     nodoHijo = a.HermanoDerecho(nodoHijo);
   }
 }
+
+
+bool etiquetasRepetidas(Arbol& a) {
+  
+}
+
+Arbol copiarArbol(Arbol& a1){
+  Arbol a2 = Arbol();
+  if(!a1.Vacio()){
+    //Colas que vamos a usar para a1 y a2 
+    Cola<nodo_t> colaA1;
+    Cola<nodo_t> colaA2;
+    nodo_t nodoAux1;
+    nodo_t nodoAux2;
+    nodo_t nodoAuxHijo2;
+
+    //Le ponemos raíz a a2
+    //Notar que se copiar las etiquetas, no los nodos. Pero lo que se encola con nodos. 
+    a2.PonerRaiz(a1.Etiqueta(a1.Raiz()));
+    //Encolamos ambas raíces 
+    colaA1.agregar(a1.Raiz());
+    colaA2.agregar(a2.Raiz());
+    int i = 1;
+    while(!colaA1.vacia()){
+      //sacamos el primer elemento de ambas colas
+      nodoAux1 = colaA1.sacar();
+      nodoAux2 = colaA2.sacar();
+      //hijo máz izquierdo de nodoAux1
+      nodoAux1 = a1.Hijo(nodoAux1, 1);
+      while(nodoAux1 != a1.NodoNulo()){
+        //Agregamos hijo en la ultima posición
+        nodoAuxHijo2 = a2.AgregarHijo(nodoAux2, a1.Etiqueta(nodoAux1), a2.NumHijos(nodoAux2) + 1);
+
+        //Encolamos
+        colaA1.agregar(nodoAux1);
+        colaA2.agregar(nodoAuxHijo2);
+        nodoAux1 = a1.HermanoDerecho(nodoAux1);
+      }
+      i ++;
+    }
+  }
+  return a2;
+}
+
+bool iguales(Arbol& a1, Arbol& a2) {
+  if (a1.NumElem() != a2.NumElem()) {
+    return false; 
+  } else {
+    //si ambos árboles están vacíos son iguales
+    if (a1.NumElem() == 0) {
+      return true;
+    } else {
+      if (a1.Etiqueta(a1.Raiz()) != a2.Etiqueta(a2.Raiz())) {
+        return false;
+      } else {
+        Cola<nodo_t> colaA1;
+        Cola<nodo_t> colaA2;
+        
+        //Encolamos las raíces
+        colaA1.agregar(a1.Raiz());
+        colaA2.agregar(a2.Raiz());
+        bool seguir = true;
+        nodo_t nodo1;
+        nodo_t nodo2;
+        nodo_t nodoHijo1;
+        nodo_t nodoHijo2;
+        
+        while (!colaA1.vacia() && seguir) {
+          //Desencolamos el primer elemento de ambas colas
+          nodo1 = colaA1.sacar();
+          nodo2 = colaA2.sacar();
+          if (a1.NumHijos(nodo1) != a2.NumHijos(nodo2)) {
+            seguir = false;
+          } else {
+            //Guardamos el hijo más izquierdo de cada sub-árbol
+            nodoHijo1 = a1.Hijo(nodo1);
+            nodoHijo2 = a2.Hijo(nodo2);
+            while (nodoHijo1 != a1.NodoNulo() && seguir) {
+              if (a1.Etiqueta(nodoHijo1) != a2.Etiqueta(nodoHijo2)) {
+                seguir = false;
+              } else {
+                //Encolamos
+                colaA1.agregar(nodoHijo1);
+                colaA2.agregar(nodoHijo2);
+                //Pasamos al hermano derecho para realizar todo el recorrido
+                nodoHijo1 = a1.HermanoDerecho(nodo1);
+                nodoHijo2 = a2.HermanoDerecho(nodo2);
+              }
+            }
+          }
+        }
+        return seguir;
+      }
+    }
+  }
+}
+
 //Arbol inicializado y n valido en a, con raiz
 int profundidadNodo(nodo_t n, Arbol& a){
   int profundidad = 0;
