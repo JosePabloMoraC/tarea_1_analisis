@@ -1,11 +1,14 @@
 #include <gtest/gtest.h>
-#include <traductor.hh> //se debe cambiar de acuerdo al árbol a probar 
-#include <algoritmos.hh>
+//#include <traductor.hh> //se debe cambiar de acuerdo al árbol a probar 
 #include <iostream>
-/*
+#include <arbol_lista.hh>
+#include <algoritmos.hh>
+
 //Para poder correr los tests es necesario cambiar en el cmake, la línea 18 [${TareaProgramada1_SOURCE_DIR}/src/arbol___] de acuerdo al ábol que se este incluyendo
 //Para efectos de entregar, el CmakeLists.txt de la carpeta tests va a estar sin la extensión .txt
 // Correr con : (1) cmake -S . -B build; (2)cmake --build build; (3) cd build/tests; (4) ctest
+
+/*
 TEST(Arboles, Insertar) {
     //Notar que indirectamente tambien probamos los métodos Etiqueta e Hijo. Posiblemente esto no sea lo ideal, pero el objetivo del trabajo no es hacer pruebas. 
    Arbol a1 = Arbol();
@@ -26,11 +29,14 @@ TEST(Arboles, Insertar) {
    EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Raiz(), 6)), 140);
 }
 
+
 TEST(Arboles, Padre) {
    Arbol a1 = Arbol();
    a1.PonerRaiz(100);
    a1.AgregarHijo(a1.Raiz(), 120, 1);
+   a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 200, 1);
    EXPECT_EQ(a1.Etiqueta(a1.Padre(a1.Hijo(a1.Raiz(), 1))), 100);
+   EXPECT_EQ(a1.Etiqueta(a1.Padre(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1))), 120);
 }
 
 
@@ -65,15 +71,18 @@ TEST(Arboles, BorrarHoja){
    a1.AgregarHijo(a1.Raiz(), 110, 1); 
    a1.AgregarHijo(a1.Raiz(), 130, 3); 
    a1.AgregarHijo(a1.Raiz(), 140, 4); 
-   a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 200, 1); 
+   //a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 200, 1); 
    EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Raiz(), 1)), 110);
    EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Raiz(), 3)), 130);
    a1.BorrarHoja(a1.Hijo(a1.Raiz(), 1));
    EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Raiz(), 1)), 120);
+   EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Raiz(), 2)), 130);
    EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Raiz(), 3)), 140);
    a1.BorrarHoja(a1.Hijo(a1.Raiz(), 2));
    EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Raiz(), 2)), 140);
 }
+
+
 
 */
 
@@ -181,6 +190,9 @@ TEST(Algoritmos, ListarHermanos3){
   //Nodos Hijos de 130
   a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 240, 1);
   a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 250, 2);
+  //Nodos Hijos de 140
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 4), 260, 1);
+
   //Nodos Hijos de 200
   a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 300, 1); 
   a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 310, 2); 
@@ -501,7 +513,7 @@ TEST(Algoritmos, existeEtiqueta){
 }
 
 TEST(Algoritmos, copiarArbol){
-      //Árbol de prueba
+   //Árbol de prueba
   Arbol a1 = Arbol();
   //Raíz
   a1.PonerRaiz(100);
@@ -526,9 +538,10 @@ TEST(Algoritmos, copiarArbol){
   a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 300, 1); 
   a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 310, 2); 
   
-  Arbol a2 = copiarArbol(a1);
+  Arbol a2 = Arbol();
+  copiarArbol(a1, a2);
   //Primer nivel
-  EXPECT_EQ(a1.Etiqueta(a1.Raiz()), a1.Etiqueta(a1.Raiz()));
+  //EXPECT_EQ(a1.Etiqueta(a1.Raiz()), a2.Etiqueta(a2.Raiz()));
   //Segundo nivel
   EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Raiz(), 1)), a2.Etiqueta(a2.Hijo(a2.Raiz(), 1)));
   EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Raiz(), 2)), a2.Etiqueta(a2.Hijo(a2.Raiz(), 2)));
@@ -544,6 +557,4 @@ TEST(Algoritmos, copiarArbol){
   EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 2)), a2.Etiqueta(a1.Hijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 2)));
 }
 
-TEST(Arboles, Stop) {
-    std::cin.ignore();
-}
+

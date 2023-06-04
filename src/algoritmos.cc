@@ -72,13 +72,14 @@ void nivelesArbolRecursivo(nodo_t nodoActual, int nivelActual, Arbol& a, int& nN
   }
 }
 
-
+/*
 bool etiquetasRepetidas(Arbol& a) {
   
 }
+*/
 
-Arbol copiarArbol(Arbol& a1){
-  Arbol a2 = Arbol();
+void copiarArbol(Arbol& a1, Arbol& a2){
+  a2.Vaciar();
   if(!a1.Vacio()){
     //Colas que vamos a usar para a1 y a2 
     Cola<nodo_t> colaA1;
@@ -88,12 +89,11 @@ Arbol copiarArbol(Arbol& a1){
     nodo_t nodoAuxHijo2;
 
     //Le ponemos raíz a a2
-    //Notar que se copiar las etiquetas, no los nodos. Pero lo que se encola con nodos. 
+    //Notar que se copiar las etiquetas, no los nodos. Pero lo que se encola son nodos. 
     a2.PonerRaiz(a1.Etiqueta(a1.Raiz()));
     //Encolamos ambas raíces 
     colaA1.agregar(a1.Raiz());
     colaA2.agregar(a2.Raiz());
-    int i = 1;
     while(!colaA1.vacia()){
       //sacamos el primer elemento de ambas colas
       nodoAux1 = colaA1.sacar();
@@ -103,18 +103,17 @@ Arbol copiarArbol(Arbol& a1){
       while(nodoAux1 != a1.NodoNulo()){
         //Agregamos hijo en la ultima posición
         nodoAuxHijo2 = a2.AgregarHijo(nodoAux2, a1.Etiqueta(nodoAux1), a2.NumHijos(nodoAux2) + 1);
-
         //Encolamos
         colaA1.agregar(nodoAux1);
         colaA2.agregar(nodoAuxHijo2);
         nodoAux1 = a1.HermanoDerecho(nodoAux1);
       }
-      i ++;
     }
-  }
-  return a2;
+  }  
 }
 
+//No compila - NumElem() no forma parte de los métodos del árbol
+/*
 bool iguales(Arbol& a1, Arbol& a2) {
   if (a1.NumElem() != a2.NumElem()) {
     return false; 
@@ -167,6 +166,7 @@ bool iguales(Arbol& a1, Arbol& a2) {
     }
   }
 }
+*/
 
 //Arbol inicializado y n valido en a, con raiz
 int profundidadNodo(nodo_t n, Arbol& a){
