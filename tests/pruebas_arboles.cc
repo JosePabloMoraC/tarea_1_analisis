@@ -8,7 +8,7 @@
 //Para efectos de entregar, el CmakeLists.txt de la carpeta tests va a estar sin la extensión .txt
 // Correr con : (1) cmake -S . -B build; (2)cmake --build build; (3) cd build/tests; (4) ctest
 
-/*
+
 TEST(Arboles, Insertar) {
     //Notar que indirectamente tambien probamos los métodos Etiqueta e Hijo. Posiblemente esto no sea lo ideal, pero el objetivo del trabajo no es hacer pruebas. 
    Arbol a1 = Arbol();
@@ -81,10 +81,6 @@ TEST(Arboles, BorrarHoja){
    a1.BorrarHoja(a1.Hijo(a1.Raiz(), 2));
    EXPECT_EQ(a1.Etiqueta(a1.Hijo(a1.Raiz(), 2)), 140);
 }
-
-
-
-*/
 
 
 // Pruebas de los algoritmos
@@ -597,4 +593,46 @@ TEST(Algoritmos, arbolesIguales){
   EXPECT_EQ(iguales(a1, a2), false);
   a2.ModificarEtiqueta(a1.Hijo(a2.Hijo(a1.Raiz(), 1), 3), 450);
   EXPECT_EQ(iguales(a1, a2), true);
+}
+
+TEST(Algoritmos, etiquetasRepetidas){
+   //Árbol de prueba
+  Arbol a1 = Arbol();
+  //Raíz
+  a1.PonerRaiz(100);
+  
+  //Nivel 1 
+  a1.AgregarHijo(a1.Raiz(), 110, 1);
+  a1.AgregarHijo(a1.Raiz(), 120, 2);
+  a1.AgregarHijo(a1.Raiz(), 130, 3);
+  a1.AgregarHijo(a1.Raiz(), 140, 4);
+  //Nivel 2
+  //Nodos hijos de 110
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 200, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 210, 2);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 220, 3);
+  //Nodos Hijos de 120 
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 2), 230, 1);
+  //Nodos Hijos de 130
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 240, 1);
+  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 250, 2);
+  //Nivel 3
+  //Nodos Hijos de 200
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 300, 1); 
+  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 310, 2); 
+  EXPECT_EQ(etiquetasRepetidas(a1), false);
+  a1.ModificarEtiqueta(a1.Raiz(), 110);
+  EXPECT_EQ(etiquetasRepetidas(a1), true);
+  a1.ModificarEtiqueta(a1.Raiz(), 100);
+  EXPECT_EQ(etiquetasRepetidas(a1), false);
+  a1.AgregarHijo(a1.Raiz(), 140, 4);
+  EXPECT_EQ(etiquetasRepetidas(a1), true);
+  a1.BorrarHoja(a1.Hijo(a1.Raiz(), 4));
+  EXPECT_EQ(etiquetasRepetidas(a1), false);
+  a1.ModificarEtiqueta(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1),  140);
+  EXPECT_EQ(etiquetasRepetidas(a1), true);
+}
+
+TEST(Algoritmos, Stop) {
+    std::cin.ignore();
 }

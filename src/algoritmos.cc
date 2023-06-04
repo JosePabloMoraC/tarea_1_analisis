@@ -80,17 +80,17 @@ bool etiquetasRepetidas(Arbol& a) {
   nodo_t nodoHijo;
   int etiqueta;
   bool repetido = false;
-  int arreglo[a.NumNodos()];
+  int* arreglo = new int[a.NumNodos()];
   int numEtiquetas = 0;
   
   //Encolamos la raíz
   cola.agregar(a.Raiz());
-  while (!cola.Vacia() && !repetido) {
+  while (!cola.vacia() && !repetido) {
     //Desencolamos el primer elemento
     nodo = cola.sacar();
-    etiqueta = a.Recuperar(nodo);
+    etiqueta = a.Etiqueta(nodo);
     //Comparamos la etiqueta que desencolamos con todos los elementos que están en el arreglo
-    for (int pos = 0; pos <= numEtiquetas && !repetido; pos++;) {
+    for (int pos = 0; pos <= numEtiquetas && !repetido; pos++) {
       if (etiqueta == arreglo[pos]) {
         repetido = true;
       }
@@ -100,7 +100,7 @@ bool etiquetasRepetidas(Arbol& a) {
       //Notar que el arreglo empieza en 0
       arreglo[numEtiquetas] = etiqueta;
       numEtiquetas++;
-      nodoHijo = a.Hijo(nodo); //Hijo más izquierdo
+      nodoHijo = a.Hijo(nodo, 1); //Hijo más izquierdo
       while (nodoHijo != a.NodoNulo()) {
         //Encolamos los hijos
         cola.agregar(nodoHijo);
@@ -108,6 +108,7 @@ bool etiquetasRepetidas(Arbol& a) {
       }
     }
   }
+  delete[] arreglo;
   return repetido;
 }
 
