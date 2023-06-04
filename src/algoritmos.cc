@@ -113,13 +113,13 @@ void copiarArbol(Arbol& a1, Arbol& a2){
 }
 
 //No compila - NumElem() no forma parte de los métodos del árbol
-/*
+
 bool iguales(Arbol& a1, Arbol& a2) {
-  if (a1.NumElem() != a2.NumElem()) {
+  if (a1.NumNodos() != a2.NumNodos()) {
     return false; 
   } else {
     //si ambos árboles están vacíos son iguales
-    if (a1.NumElem() == 0) {
+    if (a1.NumNodos() == 0) {
       return true;
     } else {
       if (a1.Etiqueta(a1.Raiz()) != a2.Etiqueta(a2.Raiz())) {
@@ -145,8 +145,8 @@ bool iguales(Arbol& a1, Arbol& a2) {
             seguir = false;
           } else {
             //Guardamos el hijo más izquierdo de cada sub-árbol
-            nodoHijo1 = a1.Hijo(nodo1);
-            nodoHijo2 = a2.Hijo(nodo2);
+            nodoHijo1 = a1.Hijo(nodo1, 1);
+            nodoHijo2 = a2.Hijo(nodo2, 1);
             while (nodoHijo1 != a1.NodoNulo() && seguir) {
               if (a1.Etiqueta(nodoHijo1) != a2.Etiqueta(nodoHijo2)) {
                 seguir = false;
@@ -155,8 +155,8 @@ bool iguales(Arbol& a1, Arbol& a2) {
                 colaA1.agregar(nodoHijo1);
                 colaA2.agregar(nodoHijo2);
                 //Pasamos al hermano derecho para realizar todo el recorrido
-                nodoHijo1 = a1.HermanoDerecho(nodo1);
-                nodoHijo2 = a2.HermanoDerecho(nodo2);
+                nodoHijo1 = a1.HermanoDerecho(nodoHijo1);
+                nodoHijo2 = a2.HermanoDerecho(nodoHijo2);
               }
             }
           }
@@ -166,7 +166,7 @@ bool iguales(Arbol& a1, Arbol& a2) {
     }
   }
 }
-*/
+
 
 //Arbol inicializado y n valido en a, con raiz
 int profundidadNodo(nodo_t n, Arbol& a){
