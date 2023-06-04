@@ -205,7 +205,6 @@ nodo_t Arbol::Hijo(nodo_t n, int i){
         //cout << "diferente" << endl;
         return nodoAux;
     }else{
-        cout << "Igual" << endl;
         return nullptr;
     }  
 }
@@ -283,16 +282,6 @@ int Arbol::NumNodos(){
     return contadorNodos;
 }
 
-//borrar -> Destructor 
-void Arbol::funciona(){
-    cout << "Sí funciono" << endl;
-    if (raiz == nullptr)
-    {
-        cout << "Raíz nula" << endl;  
-    } else {
-        cout << "Raíz ptr:" << raiz << endl;  
-    }  
-}
 
 nodo_t Arbol::NodoNulo(){
     return nullptr;
