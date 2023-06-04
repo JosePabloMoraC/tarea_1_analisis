@@ -1,6 +1,14 @@
 #include <algoritmos.hh>
 //Algoritmos
-//De acuerdo a la profesora, para evitar complicaciones, podemos realizar los algoritmos en el main y usando variables globales. 
+
+
+
+/*
+Definición: Este algoritmo se encarga de listar las etiquetas de todos los hermanos de un nodo. 
+Efecto: Imprime todas las etiquetas de todos los hermanos de un nodo dado.
+Requiere: El árbol inicializado, no vacío y nodo válido en el árbol.
+Modifica: N/A
+*/
 void etiquetasHermanos(nodo_t n,  Arbol& a){
   //Tenemos dos opciones, ver todos los hermanos izquierdos y derechos o llamar al padre. La opción más eficiente depende de la estructura de datos.
   //Vamos a llamar al padre
@@ -14,6 +22,12 @@ void etiquetasHermanos(nodo_t n,  Arbol& a){
   }
 }
 
+/*
+Definición: Este algoritmo se encarga de listar las etiquetas de todos los nodos del i-ésimo nivel de un árbol, utilizando el recorrido por niveles.
+Efecto: Imprime todas las etiquetas de todos los nodos del nivel dado en el árbol.
+Requiere: El árbol inicializado y nivel válido en el árbol.
+Modifica: N/A
+*/
 void etiquetasNivel(int nivel, Arbol& a){
   if(!a.Vacio()){
     Cola<nodo_t> c1;
@@ -49,8 +63,12 @@ void etiquetasNivel(int nivel, Arbol& a){
     }
 }
 
-
-//Requiere árbol inicializado 
+/*
+Definición: Este algoritmo averigua cuántos niveles posee un árbol, mediante un recorrido en pre orden. 
+Efecto: Devuelve cuantos niveles posee un árbol.
+Requiere: El árbol inicializado.
+Modifica: N/A
+*/ 
 int nivelesArbol(Arbol& a){
   int niveles = 0;
   if(a.Raiz() != a.NodoNulo()){
@@ -72,7 +90,12 @@ void nivelesArbolRecursivo(nodo_t nodoActual, int nivelActual, Arbol& a, int& nN
   }
 }
 
-//Requiere árbol no vacío
+/*
+Definición: Este algoritmo se encarga de averiguar si el árbol tiene etiquetas repetidas utilizando un recorrido por niveles.
+Efecto: Devuelve verdadero si tiene etiquetas repetidas y falso si no.
+Requiere: El árbol inicializado y no vacío.
+Modifica: N/A
+*/
 bool etiquetasRepetidas(Arbol& a) {
   //Usamos una cola como modelo auxiliar
   Cola<nodo_t> cola;
@@ -112,6 +135,14 @@ bool etiquetasRepetidas(Arbol& a) {
   return repetido;
 }
 
+
+/*
+Definición: Este algoritmo se encarga de copiar el árbol a1 en a2. Previo a realizar
+la  copiar, se encarga de vaciar a a2
+Efecto: Copia en árbol a1 en a2.
+Requiere: El árbol inicializado.
+Modifica: árbol a2.
+*/
 void copiarArbol(Arbol& a1, Arbol& a2){
   a2.Vaciar();
   if(!a1.Vacio()){
@@ -146,8 +177,12 @@ void copiarArbol(Arbol& a1, Arbol& a2){
   }  
 }
 
-//No compila - NumElem() no forma parte de los métodos del árbol
-
+/*
+Definición: Este algoritmo averigua si un árbol a1 es idéntico a un árbol a2.
+Efecto: Devuelve true si los árboles son iguales, en caso contrario devuelve falso.
+Requiere: Los árboles inicializados.
+Modifica: N/A
+*/
 bool iguales(Arbol& a1, Arbol& a2) {
   if (a1.NumNodos() != a2.NumNodos()) {
     return false; 
@@ -201,8 +236,12 @@ bool iguales(Arbol& a1, Arbol& a2) {
   }
 }
 
-
-//Arbol inicializado y n valido en a, con raiz
+/*
+Definición: Este algoritmo averigua cuál es la profundidad de un nodo, esto desde el nodo raíz hasta el nodo dado.
+Efecto: Devuelve la profundidad de dicho nodo en el árbol.
+Requiere: El árbol inicializado, con raíz y nodo válido en el árbol.
+Modifica: N/A
+*/
 int profundidadNodo(nodo_t n, Arbol& a){
   int profundidad = 0;
 
@@ -218,6 +257,7 @@ int profundidadNodo(nodo_t n, Arbol& a){
   return profundidad;
 }
 
+
 void profundidadRecursivo(nodo_t nodoBuscado, nodo_t nodoActual, int profundidadActual, Arbol& a, int& profundidad){
   if(nodoActual == nodoBuscado){
     profundidad = profundidadActual;
@@ -230,7 +270,12 @@ void profundidadRecursivo(nodo_t nodoBuscado, nodo_t nodoActual, int profundidad
   }
 }
 
-//Arbol inicializado y n valido, con raiz 
+/*
+Definición: Este algoritmo averigua la altura que posee un nodo, siendo esta la distancia del nodo dado hasta su descendiente más alejado.
+Efecto: Devuelve la altura que posee un nodo en el árbol.
+Requiere: El árbol inicializado y nodo válido en el árbol.
+Modifica: N/A
+*/
 int alturaNodo(nodo_t n, Arbol& a){
   int altura = 0;
   //notar que el problema a resolver es el mismo que ya resuelve nivelesArbolRecursivo(), por lo que podemos reutilizar está función.
@@ -244,6 +289,12 @@ int alturaNodo(nodo_t n, Arbol& a){
 }
 
 
+/*
+Definición: Este algoritmo se encarga buscar la etiqueta dada en el árbol, mediante un recorrido en pre orden. Si la etiqueta dada se encuentra en el árbol devuelve verdadero y si no devuelve falso.
+Efecto: Devuelve verdadero si la etiqueta se encuentra en el árbol y falso si no.
+Requiere: El árbol inicializado y etiqueta válida en el árbol .
+Modifica: N/A
+*/
 bool existeEtiqueta(int e, Arbol& a){
   bool pertenece = false; 
   if(a.Raiz() != a.NodoNulo()){

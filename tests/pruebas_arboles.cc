@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 //#include <traductor.hh> //se debe cambiar de acuerdo al árbol a probar 
 #include <iostream>
-#include <arbol_lista.hh>
+#include <traductor.hh>
 #include <algoritmos.hh>
 
 //Para poder correr los tests es necesario cambiar en el cmake, la línea 18 [${TareaProgramada1_SOURCE_DIR}/src/arbol___] de acuerdo al ábol que se este incluyendo
