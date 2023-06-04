@@ -9,14 +9,13 @@ struct cajaHijo;  // Declaración previa
 struct cajaPrincipal
 {
     int valor;
-    cajaPrincipal* siguiente;
-    cajaHijo* sublista;
+    cajaPrincipal* siguiente = nullptr;;
+    cajaHijo* sublista = nullptr;
 };
 
 struct cajaHijo 
 {
-    int valor;
-    cajaHijo* siguiente;
+    cajaHijo* siguiente = nullptr;
     cajaPrincipal* principal;
 };
 
@@ -26,11 +25,10 @@ class Arbol
 {
 private:
     nodo_t raiz; 
-    nodo_t final;
-    int contadorNodos = 0;
-    void VaciarRecursivo(nodo_t n);
+    int contadorNodos;
 public:
     void Vaciar();
+    
     bool Vacio();
     void PonerRaiz(int e);
     nodo_t AgregarHijo(nodo_t n, int e, int k);
@@ -45,7 +43,7 @@ public:
     int NumHijos(nodo_t n); 
     int NumNodos(); 
     nodo_t NodoNulo();
-
+    
     Arbol();
     ~Arbol();
 };
