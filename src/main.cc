@@ -2,248 +2,273 @@
 #include <colaLSE.hh>
 #include <algoritmos.hh>
 
+
 using namespace std;
 
-/*
-void submenuCola(){
-  int respuestaC;
-  bool stop = false;
-  Cola c1 = Cola();
-  cout <<  "****  Cola  ***" << endl;
-  cout <<  "1) Iniciar" << endl;
-  cout <<  "2) Agregar" << endl;
-  cout <<  "3) Sacar" << endl;
-  cout <<  "4) Frente" << endl;
-  cout <<  "5) Vacia" << endl;
-  cout <<  "6) Vaciar" << endl;
-  cout <<  "7) Destruir" << endl;
-  cout <<  "8) Salir" << endl;
-  cout << "Por favor utilice sólo los números dados según lo que desee hacer" << endl;
-  while (stop != true) {
-    cout << "Seleccione el operador que desea utilizar: " << endl;
-    cin >> respuestaC;
-    switch (respuestaC) {
-      case 1: cout << "Ha seleccionado iniciar" << endl;
-        c1 = Cola();
-        break;
-      case 2: cout << "Ha seleccionado agregar" << endl;
-        cout << "Digite el elemento a agregar: " << endl;
-        int element;
-        cin >> element;
-        c1.agregar(element);
-        cout << "Se agregó el elemento " << element << " a la cola." << endl;
-      break;
-      case 3: cout << "Ha seleccionado sacar" << endl;
-        cout << "Se sacó el elemento " << c1.sacar() << " de la cola." << endl;
-        break;
-      case 4: cout << "Ha seleccionado frente" << endl;
-        cout << "El elemento del frente es " << c1.frente() << endl;
-        break;
-      case 5: cout << "Ha seleccionado vacia" << endl;
-        if (c1.vacia()) {
-          cout << "La cola está vacía" << endl;
-        } else {
-          cout << "La cola no está vacía" << endl;
-        }
-        break;
-      case 6: cout << "Ha seleccionado vaciar" << endl;
-        c1.vaciar();
-        cout << "Se ha vaciado la cola" << endl;
-        break;
-      case 7: cout << "Ha seleccionado destruir" << endl;
-        c1.~Cola();
-        cout << "Se ha destruido la cola" << endl;
-        break;
-      case 8: cout << "Ha seleccionado salir" << endl, stop = true;
-        c1.~Cola();
-        break;
-      default: cout << "Respuesta inválida" << endl, stop = true;
-    }
-  }
-}
-
-void submenuArbol(){
+void menuOperadores(Arbol& a, Arbol& b){
+  //a es el árbol con el que se va a trabajar
   int respuestaC;
   int elemento;
   int nodo;
   int pos;
   nodo_t nodoResultado;
   bool stop = false;
-  Cola c1 = Cola();
-  Arbol a1 = Arbol();
   Traductor trad = Traductor();
-  cout <<  "****  Arbol  ***" << endl;
-  cout <<  "1) Crear" << endl;
-  cout <<  "2) Poner Raiz" << endl;
-  cout <<  "3) Agregar Hijo" << endl;
-  cout <<  "4) Borrar Hoja" << endl;
-  cout <<  "5) Modificar Etiqueta" << endl;
-  cout <<  "6) Raíz" << endl;
-  cout <<  "7) Hijo" << endl;
-  cout <<  "8) Padre" << endl;
-  cout <<  "9) Hermano Derecho" << endl;
-  cout <<  "10) Hermano Izquierdo" << endl;
-  cout <<  "11) Numero de Hijos" << endl;
-  cout <<  "12) Numero de Nodos" << endl;
-  cout <<  "13) Vacio" << endl;
-  cout <<  "14) Vaciar" << endl;
-  cout <<  "15) Destruir" << endl;
-  cout <<  "16) Salir" << endl;
+  cout <<  "****  Operadores básicos modelo árbol  ***" << endl;
+  cout <<  "0) Regresar al menú principal" << endl;
+  cout <<  "1) Poner Raiz" << endl;
+  cout <<  "2) Agregar Hijo" << endl;
+  cout <<  "3) Borrar Hoja" << endl;
+  cout <<  "4) Modificar Etiqueta" << endl;
+  cout <<  "5) Raíz" << endl;
+  cout <<  "6) Hijo" << endl;
+  cout <<  "7) Padre" << endl;
+  cout <<  "8) Hermano Derecho" << endl;
+  cout <<  "9) Hermano Izquierdo" << endl;
+  cout <<  "10) Numero de Hijos" << endl;
+  cout <<  "11) Numero de Nodos" << endl;
+  cout <<  "12) Vacio" << endl;
+  cout <<  "13) Vaciar" << endl;
   cout << "Por favor utilice sólo los números dados según lo que desee hacer" << endl;
 
   while (stop != true) {
     cout << "Seleccione el operador que desea utilizar: " << endl;
     cin >> respuestaC;
     switch (respuestaC) {
-      case 1: cout << "Ha seleccionado crear" << endl;
-        a1 = Arbol();
+      case 0: cout << "Ha seleccionado regresar al menu principal" << endl;
+        cout << endl;
+        stop = true;
         break;
-      case 2: cout << "Ha seleccionado Poner Raiz" << endl;
+      case 1: cout << "Ha seleccionado Poner Raiz" << endl;
         cout << "Digite el elemento de tipo entero que pertenece a la raiz: " << endl;
         cin >> elemento;
-        a1.PonerRaiz(elemento);
+        a.PonerRaiz(elemento);
         cout << "El elemento " << elemento << " es la raiz." << endl;
-      break;
-      case 3: cout << "Ha seleccionado Agregar Hijo" << endl;
+        break;
+      case 2: cout << "Ha seleccionado Agregar Hijo" << endl;
         cout << "Introduzca el nodo al que le quiere agregar un hijo" << endl;
         cin >> nodo;
         cout << "Introduzca la etiqueta perteneciente al nuevo nodo" << endl;
         cin >> elemento;
         cout << "Introduzca la posición que va a ocupar el nuevo nodo dentro de los nodos hijos" << endl;
         cin >> pos;
-        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a1);
-        cout << "Se agrego el nodo " << elemento << " al nodo padre " << a1.Etiqueta(nodoResultado) << endl;
-        a1.AgregarHijo(nodoResultado, elemento, pos); 
+        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a);
+        cout << "Se agrego el nodo " << elemento << " al nodo padre " << a.Etiqueta(nodoResultado) << endl;
+        a.AgregarHijo(nodoResultado, elemento, pos); 
         break;
-      case 4: cout << "Ha seleccionado Borrar Hoja" << endl;
+      case 3: cout << "Ha seleccionado Borrar Hoja" << endl;
         cout << "Introduzca la hoja que desea borrar " << endl;
         cin >> nodo;
-        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a1);
-        cout << "Se ha eliminado la hoja " << a1.Etiqueta(nodoResultado) << endl; //No estamos realizando controles de entrada
-        a1.BorrarHoja(nodoResultado); 
+        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a);
+        cout << "Se ha eliminado la hoja " << a.Etiqueta(nodoResultado) << endl; //No estamos realizando controles de entrada
+        a.BorrarHoja(nodoResultado); 
         break;
-      case 5: cout << "Ha seleccionado Modificar Etiqueta" << endl;
+      case 4: cout << "Ha seleccionado Modificar Etiqueta" << endl;
         cout << "Introduzca el nodo al que le quiere modificar la etiqueta " << endl;
         cin >> nodo;
         cout << "Introduzca la nueva etiqueta " << endl;
         cin >> elemento;
-        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a1);
-        a1.ModificarEtiqueta(nodoResultado, elemento);
-        cout << "La nueva Etiqueta del nodo es " << a1.Etiqueta(nodoResultado) << endl;
+        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a);
+        a.ModificarEtiqueta(nodoResultado, elemento);
+        cout << "La nueva Etiqueta del nodo es " << a.Etiqueta(nodoResultado) << endl;
         break;
-      case 6: cout << "Ha seleccionado Raiz" << endl;
-        cout << "La raiz es " << a1.Etiqueta(a1.Raiz()) << endl;
+      case 5: cout << "Ha seleccionado Raiz" << endl;
+        cout << "La raiz es " << a.Etiqueta(a.Raiz()) << endl;
         break;
-      case 7: cout << "Ha seleccionado Hijo" << endl;
+      case 6: cout << "Ha seleccionado Hijo" << endl;
         cout << "Introduzca el nodo padre " << endl;
         cin >> nodo;
         cout << "Introduzca la posición del nodo hijo " << endl;
         cin >> pos;
-        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a1);
-        cout << "El nodo hijo es: " << a1.Etiqueta(a1.Hijo(nodoResultado, pos)) << endl;
+        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a);
+        cout << "El nodo hijo es: " << a.Etiqueta(a.Hijo(nodoResultado, pos)) << endl;
         break;
-      case 8: cout << "Ha selecionado Padre" << endl, 
+      case 7: cout << "Ha selecionado Padre" << endl, 
         cout << "Introduzca el nodo hijo " << endl;
         cin >> nodo;
-        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a1);
-        cout << "El padre es: " << a1.Etiqueta(a1.Padre(nodoResultado)) << endl;
+        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a);
+        cout << "El padre es: " << a.Etiqueta(a.Padre(nodoResultado)) << endl;
         break;
-      case 9: cout << "Ha selecionado Hermano derecho" << endl, 
+      case 8: cout << "Ha selecionado Hermano derecho" << endl, 
         cout << "Introduzca el nodo" << endl;
         cin >> nodo;
-        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a1);
-        cout << "El hermano derecho es: " << a1.Etiqueta(a1.HermanoDerecho(nodoResultado)) << endl;
+        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a);
+        cout << "El hermano derecho es: " << a.Etiqueta(a.HermanoDerecho(nodoResultado)) << endl;
         break;
-      case 10: cout << "Ha selecionado Hermano Izquierdo" << endl, 
+      case 9: cout << "Ha selecionado Hermano Izquierdo" << endl, 
         cout << "Introduzca el nodo" << endl;
         cin >> nodo;
-        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a1);
-        cout << "El hermano izquierdo es: " << a1.Etiqueta(a1.HermanoIzquierdo(nodoResultado)) << endl;
+        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a);
+        cout << "El hermano izquierdo es: " << a.Etiqueta(a.HermanoIzquierdo(nodoResultado)) << endl;
         break;
-      case 11: cout << "Ha selecionado Numero de Hijos" << endl, 
+      case 10: cout << "Ha selecionado Numero de Hijos" << endl, 
         cout << "Introduzca el nodo" << endl;
         cin >> nodo;
-        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a1);
-        cout << "El numero de hijos es " << a1.NumHijos(nodoResultado) << endl;
+        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a);
+        cout << "El numero de hijos es " << a.NumHijos(nodoResultado) << endl;
         break;
-      case 12: cout << "Ha selecionado Numero Nodos" << endl, 
-        cout << "El numero de nodos es " << a1.NumNodos() << endl;
+      case 11: cout << "Ha selecionado Numero Nodos" << endl, 
+        cout << "El numero de nodos es " << a.NumNodos() << endl;
         break;
-      case 13: cout << "Ha selecionado Vacio" << endl;
-        if(a1.Vacio()){
+      case 12: cout << "Ha selecionado Vacio" << endl;
+        if(a.Vacio()){
           cout << "El arbol esta vacio." << endl;
         } else {
           cout << "El arbol no esta vacio" << endl;
         }
         break;
-      case 14: cout << "Ha selecionado Vaciar" << endl;
-        a1.Vaciar();
+      case 13: cout << "Ha selecionado Vaciar" << endl;
+        a.Vaciar();
         cout << "Se ha vaciado el arbol" << endl;
-      case 15: cout << "Ha seleccionado Destruir" << endl;
-        a1.~Arbol();
-        cout << "Se ha destruido el arbol" << endl;
-        break;
-      case 16: cout << "Ha saleccionado Salir", stop = true;
-        a1.~Arbol();
-        break;
       default: cout << "Respuesta inválida" << endl;
     }
   }
 }
-*/
 
+void menuAlgoritmos(Arbol& a, Arbol& b){
+  int respuestaC;
+  //int elemento;
+  int nodo;
+  int pos;
+  nodo_t nodoResultado;
+  bool stop = false;
+  Traductor trad = Traductor();
+  cout <<  "****  Algoritmos para el modelo árbol  ***" << endl;
+  cout <<  "0) Regresar al menú principal" << endl;
+  cout <<  "1) Listar las etiquetas de todos los hermanos de un nodo" << endl;
+  cout <<  "2) Listar las etiquetas de todos los nodos del i-ésimo nivel del árbol" << endl;
+  cout <<  "3) Cantidad de niveles del árbol" << endl;
+  cout <<  "4) Averiguar si el árbol tiene etiquetas repetidas" << endl;
+  cout <<  "5) Copiar el árbol actual al árbol restante" << endl;
+  cout <<  "6) Averiguar si el árbol actual es igual al restante" << endl;
+  cout <<  "7) Averiguar cuál es la profundidad de un nodo" << endl;
+  cout <<  "8) Averiguar cuál es la altura de un nodo" << endl;
+  cout <<  "9) Averiguar si una etiqueta está en el árbol" << endl;
+
+ while (stop != true) {
+    cout << "Seleccione el algoritmo que desea utilizar: " << endl;
+    cin >> respuestaC;
+    switch (respuestaC) {
+      case 0: cout << "Ha seleccionado regresar al menu principal" << endl;
+        cout << endl;
+        stop = true;
+        break;
+      case 1: cout << "Ha seleccionado listar las etiquetas de todos los hermanos de un nodo" << endl;
+        cout << "Introduzca el nodo" << endl;
+        cin >> nodo;
+        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a);
+        etiquetasHermanos(nodoResultado, a);
+        cout << endl;
+        break;
+      case 2: cout << "Ha seleccionado listar las etiquetas del i-ésimo nivel del árbol " << endl; 
+        cout << "Introduzca el nivel a listar" << endl;
+        cin >> pos;
+        etiquetasNivel(pos, a);
+        cout << endl;
+        break;
+      case 4: cout << "Ha seleccionado Averiguar si el árbol tiene etiquetas repetidas" << endl; 
+        /*
+        if(etiquetasRepetidas(Arbol& a)){
+          cout << "El árbol presenta etiquetas repetidas" << endl;
+        } else {
+           cout << "El árbol no presenta etiquetas repetidas" << endl;
+        }
+        */
+        cout << "Falta" << endl;
+        break;
+      case 5: cout << "Ha seleccionado copiar el árbol" << endl;
+        copiarArbol(a, b);
+        cout << "Se ha vaciado el árbol restante" << endl;
+        cout << "Se ha copiado el árbol actual en el árbol restante" << endl;
+        break;
+      case 6: cout << "Ha seleccionado averiguar si los árboles son iguales" << endl;
+        if(iguales(a, b)){
+          cout << "Los árboles son iguales" << endl;
+        } else {
+          cout << "Los árboles no son iguales" << endl;
+        }
+        break;
+      case 7: cout << "Ha seleccionado averiguar cuál es la profundidad de un nodo" << endl;
+        cout << "Introduzca el nodo" << endl;
+        cin >> nodo;
+        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a);
+        cout << "La profundidad del nodo es: " << profundidadNodo(nodoResultado, a) << endl;
+        break;
+      case 8: cout << "Ha selecciona averiguar cuál es la altura de un nodo" << endl;
+        cout << "Introduzca el nodo" << endl;
+        cin >> nodo;
+        nodoResultado = trad.Etiqueta_a_Nodo(nodo, a);
+        cout << "La altura del nodo es: " << alturaNodo(nodoResultado, a) << endl;
+        break;
+      case 9: cout << "Ha seleccionado averiguar si una etiqueta está en el árbol" << endl;
+        cout << "Introduzca la etiqueta" << endl;
+        cin >> nodo;
+        if(existeEtiqueta(nodo, a)){
+          cout << "La etiqueta " << nodo << " se encuentra en el árbol" << endl;
+        } else {
+          cout << "La etiqueta " << nodo << " no se encuentra en el árbol" << endl;
+        }
+        break;
+      default: cout << "Respuesta inválida" << endl;
+    }
+ }
+}
+
+void subMenuArbol(Arbol& a, Arbol& b){
+    bool continuar = true;
+    int respuesta;
+
+    while(continuar) {
+    cout << "1) Utilizar operadores básicos del modelo árbol" << endl;
+    cout << "2) Utilizar algoritmos para el modelo árbol" << endl;
+    cout << "3) Regresar al menu anterior" << endl;
+    cout << "Ingrese su respuesta: " << endl;
+    cin >> respuesta;
+    
+    switch (respuesta) {
+      case 1 : 
+        cout << "Ha seleccionado operadores básicos del modelo árbol" << endl;
+        continuar = false;
+        menuOperadores(a, b);
+      break;
+      case 2 : cout << "Ha seleccionado algoritmos para el modelo árbol" << endl;
+        continuar = false;
+        menuAlgoritmos(a, b);
+      break;
+      case 3 : cout << "Programa finalizado" << endl, continuar = false;
+      break;
+      default: cout << "Respuesta inválida, seleccione un valor válido. " << endl;
+    }
+  }
+}
 
 int main () {
-  cout << "Hola mundo" << endl;
-  Arbol a1 = Arbol();
-  //Raíz
-  a1.PonerRaiz(100);
-  //Nivel 1 
-  a1.AgregarHijo(a1.Raiz(), 110, 1);
-  a1.AgregarHijo(a1.Raiz(), 120, 2);
-  a1.AgregarHijo(a1.Raiz(), 130, 3);
-  a1.AgregarHijo(a1.Raiz(), 140, 4);
-  //Nivel 2
-  //Nodos hijos de 110
-  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 200, 1);
-  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 210, 2);
-  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 1), 220, 3);
-  //Nodos Hijos de 120 
-  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 2), 230, 1);
-  //Nodos Hijos de 130
-  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 240, 1);
-  a1.AgregarHijo(a1.Hijo(a1.Raiz(), 3), 250, 2);
-
-    cout << "La cantidad de niveles del árbol es: " << nivelesArbol(a1) << endl;
-  //Nodos Hijos de 200
-  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 300, 1); 
-  a1.AgregarHijo(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 310, 2); 
-
-
-  //"Pruebas" 
-  etiquetasHermanos(a1.Hijo(a1.Raiz(), 3), a1);
-  cout << endl;
-  cout << "La cantidad de niveles del árbol es: " << nivelesArbol(a1) << endl;
-  cout << endl;
-  cout << "Final árbol" << endl;
-  /*
+  cout << "El siguiente programa te permite trabajar con dos árboles por separado (a1 y a2)." << endl;
+  cout << "Considera el siguiente menú" << endl;  
   int respuesta;
-  cout <<  "****  MENU  ***" << endl;
-  cout << "1) Desea utilizar el modelo Arbol" << endl;
-  cout << "2) Desea utilizar el modelo Cola" << endl;
-  cout << "3) Desea salir del programa" << endl;
-  cout << "Por favor utilice sólo los números dados según lo que desee hacer" << endl;
-  cout << "Ingrese su respuesta: " << endl;
-  cin >> respuesta;
-  switch (respuesta) {
-    case 1 : cout << "Ha seleccionado el modelo árbol" << endl, submenuArbol();
-    break;
-    case 2 : cout << "Ha seleccionado el modelo cola" << endl, submenuCola();
-    break;
-    case 3 : cout << "Programa finalizado" << endl;
-    break;
-    default: cout << "Respuesta inválida" << endl;
+  Arbol a1 = Arbol();
+  Arbol a2 = Arbol();
+  bool continuar = true;
+
+  while(continuar) {
+    cout <<  "****  MENU  ***" << endl;
+    cout << "1) Desea utilizar el árbol a1" << endl;
+    cout << "2) Desea utilizar el árbol a2" << endl;
+    cout << "3) Desea salir del programa" << endl;
+    cout << "Por favor utilice sólo los números dados según lo que desee hacer" << endl;
+    cout << "Ingrese su respuesta: " << endl;
+    cin >> respuesta;
+    
+    switch (respuesta) {
+      case 1 : cout << "Ha seleccionado el árbol a1" << endl, subMenuArbol(a1, a2);
+      break;
+      case 2 : cout << "Ha seleccionado el árbol a2" << endl, subMenuArbol(a2, a1);
+      break;
+      case 3 : cout << "Programa finalizado" << endl, continuar = false;
+      break;
+      default: cout << "Respuesta inválida, seleccione un valor válido. " << endl;
+    }
   }
-*/
+
   return 0;
 }

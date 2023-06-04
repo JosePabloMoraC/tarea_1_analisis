@@ -1,7 +1,7 @@
 #ifndef TRADUCTOR_HH
 #define TRADUCTOR_HH
 
-#include <arbolArreglo.hh>
+#include <arbol_lista.hh>
 
 #include <iostream>
 using namespace std; 

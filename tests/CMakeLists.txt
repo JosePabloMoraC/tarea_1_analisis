@@ -15,9 +15,9 @@ enable_testing()
 add_executable(
     pruebas_arboles
     pruebas_arboles.cc
+    ${TareaProgramada1_SOURCE_DIR}/src/arbol_lista.cc
     ${TareaProgramada1_SOURCE_DIR}/src/algoritmos.cc
     ${TareaProgramada1_SOURCE_DIR}/src/traductor.cc
-    ${TareaProgramada1_SOURCE_DIR}/src/arbolArreglo.cc
 )
 # unit_test requiere los archivos de encabezados
 # en el folder include
