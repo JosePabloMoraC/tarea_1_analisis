@@ -90,7 +90,7 @@ bool etiquetasRepetidas(Arbol& a) {
     nodo = cola.sacar();
     etiqueta = a.Recuperar(nodo);
     //Comparamos la etiqueta que desencolamos con todos los elementos que están en el arreglo
-    for (int pos = 0; pos <= numEtiquetas && !repetido; pos++;) {
+    for (int pos = 0; pos <= numEtiquetas && !repetido; pos++) {
       if (etiqueta == arreglo[pos]) {
         repetido = true;
       }
