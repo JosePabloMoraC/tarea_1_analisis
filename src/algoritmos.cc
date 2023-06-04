@@ -72,11 +72,44 @@ void nivelesArbolRecursivo(nodo_t nodoActual, int nivelActual, Arbol& a, int& nN
   }
 }
 
-/*
+//Requiere árbol no vacío
 bool etiquetasRepetidas(Arbol& a) {
+  //Usamos una cola como modelo auxiliar
+  Cola<nodo_t> cola;
+  nodo_t nodo;
+  nodo_t nodoHijo;
+  int etiqueta;
+  bool repetido = false;
+  int arreglo[a.NumNodos()];
+  int numEtiquetas = 0;
   
+  //Encolamos la raíz
+  cola.agregar(a.Raiz());
+  while (!cola.Vacia() && !repetido) {
+    //Desencolamos el primer elemento
+    nodo = cola.sacar();
+    etiqueta = a.Recuperar(nodo);
+    //Comparamos la etiqueta que desencolamos con todos los elementos que están en el arreglo
+    for (int pos = 0; pos <= numEtiquetas && !repetido; pos++;) {
+      if (etiqueta == arreglo[pos]) {
+        repetido = true;
+      }
+    }
+    if (!repetido) {
+      //Si no se encontró en el arreglo entonces agregamos la etiqueta a la siguiente posición vacía del arreglo
+      //Notar que el arreglo empieza en 0
+      arreglo[numEtiquetas] = etiqueta;
+      numEtiquetas++;
+      nodoHijo = a.Hijo(nodo); //Hijo más izquierdo
+      while (nodoHijo != a.NodoNulo()) {
+        //Encolamos los hijos
+        cola.agregar(nodoHijo);
+        nodoHijo = a.HermanoDerecho(nodoHijo);
+      }
+    }
+  }
+  return repetido;
 }
-*/
 
 void copiarArbol(Arbol& a1, Arbol& a2){
   a2.Vaciar();
