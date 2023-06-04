@@ -583,15 +583,16 @@ TEST(Algoritmos, arbolesIguales){
   EXPECT_EQ(iguales(a1, a2), false);
   copiarArbol(a1, a2);
   EXPECT_EQ(iguales(a1, a2), true);
-
+  
   a2.ModificarEtiqueta(a2.Hijo(a2.Hijo(a2.Raiz(), 1), 1), 99);
   EXPECT_EQ(iguales(a1, a2), false);
-  a2.ModificarEtiqueta(a1.Hijo(a2.Hijo(a1.Raiz(), 1), 1), 99);
+
+  a1.ModificarEtiqueta(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 1), 99);
   EXPECT_EQ(iguales(a1, a2), true);
 
-    a2.ModificarEtiqueta(a2.Hijo(a2.Hijo(a2.Raiz(), 1), 3), 450);
+  a2.ModificarEtiqueta(a2.Hijo(a2.Hijo(a2.Raiz(), 1), 3), 450);
   EXPECT_EQ(iguales(a1, a2), false);
-  a2.ModificarEtiqueta(a1.Hijo(a2.Hijo(a1.Raiz(), 1), 3), 450);
+  a1.ModificarEtiqueta(a1.Hijo(a1.Hijo(a1.Raiz(), 1), 3), 450);
   EXPECT_EQ(iguales(a1, a2), true);
 }
 
