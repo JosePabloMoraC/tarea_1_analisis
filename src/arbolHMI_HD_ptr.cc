@@ -30,6 +30,7 @@ Arbol::~Arbol()
 void Arbol::Vaciar(){
     if(raiz != nullptr){
         VaciarRecursivo(raiz);
+        raiz = nullptr;
     }
 }
 
