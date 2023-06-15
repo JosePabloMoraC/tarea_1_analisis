@@ -34,9 +34,10 @@ void etiquetasNivel(int nivel, Arbol& a){
     nodo_t nodoHijo;
     int tamanoCola;
     int j = 1; // Se considera la raíz como el nivel 1 
-    cout << "Las etiquetas de los nodos en el nivel " << nivel << " son: ";
+    //SE COMENTARON COUT PARA REALIZAR PRUEBAS DE DURACIÓN
+    //cout << "Las etiquetas de los nodos en el nivel " << nivel << " son: ";  
     if(nivel == 1){
-      cout << a.Etiqueta(a.Raiz()) << " ";
+      //cout << a.Etiqueta(a.Raiz()) << " ";
     } else {
         c1.agregar(a.Raiz());
         while(!c1.vacia()){
@@ -51,7 +52,7 @@ void etiquetasNivel(int nivel, Arbol& a){
             while (nodoHijo != a.NodoNulo())
             {
               if(j == nivel){
-                cout << a.Etiqueta(nodoHijo) << " ";
+                //cout << a.Etiqueta(nodoHijo) << " ";
               } else {
                 c1.agregar(nodoHijo);
               }
